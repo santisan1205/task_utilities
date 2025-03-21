@@ -77,7 +77,7 @@ class Evento(object):
         anim_msg = self.gen_anim_msg("Gestures/BowShort_3")
         self.animationPublisher.publish(anim_msg)
         self.hearing = False
-        self.tm.talk("Bienvenido, soy nova, es un gusto conocerte","Spanish",animated=False)
+        self.tm.talk("Bienvenido, soy opera, es un gusto conocerte","Spanish",animated=False)
         self.tm.talk("Toca mi cabeza cuando  quieras decirme algo","Spanish",animated=True)
         rospy.sleep(0.9)
         self.tm.start_tracker_proxy()
