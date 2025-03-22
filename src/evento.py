@@ -32,6 +32,8 @@ class Evento(object):
         self.is_done = False
         self.hey_pepper=False
         self.haciendo_animacion = False
+        self.left_was_touched = False
+        self.right_was_touched = False
         states = ['INIT', 'WAIT4GUEST', 'TALK']
         self.tm = tm(perception = False,speech=True, pytoolkit=True)
         self.tm.initialize_node(self.task_name)
@@ -53,38 +55,38 @@ class Evento(object):
         self.tm.talk("Iniciando modo de Demostración","Spanish")
         print(self.consoleFormatter.format("Inicializacion del task: "+self.task_name, "HEADER"))
         self.tm.initialize_pepper()
-        subscriber = rospy.Subscriber("/pytoolkit/ALSpeechRecognition/status",speech_recognition_status_msg,self.callback_hot_word)
-        self.motion_tools_service()
-        self.enable_breathing_service()
-        self.enable_hot_word_service()
-        print(self.consoleFormatter.format("Waiting for pytoolkit/ALTabletService/show_picture_srv...", "WARNING"))
-        rospy.wait_for_service('pytoolkit/ALTabletService/show_picture_srv')
-        self.show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_srv', battery_service_srv)
-        self.play_dance_srv = rospy.ServiceProxy("/pytoolkit/ALMotion/play_dance_srv", set_output_volume_srv)
-        self.animationPublisher = rospy.Publisher('/animations', animation_msg, queue_size=10)
-        self.motion_set_stiffnesses_client = rospy.ServiceProxy("pytoolkit/ALMotion/set_stiffnesses_srv", set_stiffnesses_srv)
+        # Make the whole body breath
+        self.tm.enable_breathing_service(chain="All",state=True)
+        # Except the head, so tracking works
+        self.tm.enable_breathing_service(chain="Head",state=False)
+        self.tm.motion_tools_service()
+        self.robot_name = self.tm.robot_name
+        
+        # SET STIFFNESSES BACK TO MAX JUST IN CASE
         req_stiffnesses = set_stiffnesses_srvRequest()
         req_stiffnesses.names = "Body"
         req_stiffnesses.stiffnesses = 1
-        self.motion_set_stiffnesses_client(req_stiffnesses)
-        self.set_arms_security = rospy.ServiceProxy("pytoolkit/ALMotion/set_arms_security_srv", SetBool)
-        self.set_arms_security(True)
-        self.armsSensorSubscriber = rospy.Subscriber("/touch", touch_msg, self.callback_arms_sensor_subscriber)
+        self.tm.motion_set_stiffnesses_srv(req_stiffnesses)
+        self.tm.set_arms_security(True)
+        
         self.beggining()
 
     def on_enter_TALK(self):
         print(self.consoleFormatter.format("TALK", "HEADER"))
-        anim_msg = self.gen_anim_msg("Gestures/BowShort_3")
-        self.animationPublisher.publish(anim_msg)
+        if self.robot_name != "orion":
+            self.tm.play_animation("Gestures/BowShort_3")
+        elif self.robot_name == "orion":
+            self.tm.play_animation("Sit/Gestures/Hey_3")
         self.hearing = False
-        self.tm.talk("Bienvenido, soy nova, es un gusto conocerte","Spanish",animated=False)
+        self.tm.talk(f"Bienvenido, soy {self.robot_name}, es un gusto conocerte","Spanish",animated=False)
         self.tm.talk("Toca mi cabeza cuando  quieras decirme algo","Spanish",animated=True)
         rospy.sleep(0.9)
         self.tm.start_tracker_proxy()
         self.hearing = True
         while not self.is_done:
-            self.tm.wait_for_head_touch(timeout=10000000,message="Toca mi cabeza para hablar",message_interval=40,language="Spanish")
-            self.tm.show_words_proxy()
+            self.tm.wait_for_head_touch(timeout=10000000,message="Toca mi cabeza para hablar",message_interval=60,language="Spanish")
+            if self.robot_name != "orion":
+                self.tm.show_words_proxy()
             self.hey_pepper_function()
             self.hey_pepper=False
             rospy.sleep(0.1)
@@ -92,12 +94,23 @@ class Evento(object):
         self.TALK_done()
 
     def on_enter_WAIT4GUEST(self):
-        self.tm.show_words_proxy()
-        self.is_done=False
         print(self.consoleFormatter.format("WAIT4GUEST", "HEADER"))
-        self.tm.setRPosture_srv("stand")
-        self.tm.setMoveHead_srv.call("up")
-        self.tm.stop_tracker_proxy()
+        if self.robot_name != "orion":
+            self.tm.show_words_proxy()
+        self.is_done=False
+        if self.robot_name != "orion":
+            self.tm.setRPosture_srv("stand")
+            self.tm.stop_tracker_proxy()
+            self.tm.setMoveHead_srv.call("up")
+        elif self.robot_name == "orion":
+            self.tm.setRPosture_srv("sit")
+            self.tm.enable_breathing_service(chain="Body",state=True)
+            self.tm.enable_breathing_service(chain="Head",state=False)
+            self.tm.stop_tracker_proxy()
+            self.tm.setMoveHead_srv.call("up")
+        threading.Thread(target=self.wait_for_right_arm_thread, daemon=True).start()
+        threading.Thread(target=self.wait_for_left_arm_thread, daemon=True).start()
+        
         self.person_arrived()
 
     def check_rospy(self):
@@ -110,70 +123,54 @@ class Evento(object):
     def run(self):
         while not rospy.is_shutdown():
             self.start()
-    
-    def enable_hot_word_service(self):
-        """
-        Enables hotwords detection from the toolkit of the robot.
-        """
-        print("Waiting for hot word service")
-        rospy.wait_for_service('/pytoolkit/ALSpeechRecognition/set_hot_word_language_srv')
-        try:
-            hot_word_language_srv = rospy.ServiceProxy("/pytoolkit/ALSpeechRecognition/set_hot_word_language_srv", tablet_service_srv)
-            hot_word_language_srv("Spanish")
-            print("Hot word service connected!")
-        except rospy.ServiceException as e:
-            print("Service call failed")
-    
-    def enable_breathing_service(self):
-        """
-        Enables the breathing animations of the robot.
-        """
-        request = set_open_close_hand_srvRequest()
-        request.hand = "All"
-        request.state = "True"
-        print("Waiting for breathing service")
-        rospy.wait_for_service("/pytoolkit/ALMotion/toggle_breathing_srv")
-        try:
-            toggle_breathing_proxy = rospy.ServiceProxy("/pytoolkit/ALMotion/toggle_breathing_srv", set_open_close_hand_srv)
-            toggle_breathing_proxy(request)
-            print("Breathing service connected!")
-        except rospy.ServiceException as e:
-            print("Service call failed")
-        request = set_open_close_hand_srvRequest()
-        request.hand = "Head"
-        request.state = "False"
-        print("Waiting for breathing service")
-        rospy.wait_for_service("/pytoolkit/ALMotion/toggle_breathing_srv")
-        try:
-            toggle_breathing_proxy = rospy.ServiceProxy("/pytoolkit/ALMotion/toggle_breathing_srv", set_open_close_hand_srv)
-            toggle_breathing_proxy(request)
-            print("Breathing service connected!")
-        except rospy.ServiceException as e:
-            print("Service call failed")
-    
-    def motion_tools_service(self):
-        """
-        Enables the motion Tools service from the toolkit of the robot.
-        """
-        request = motion_tools_msg()
-        request.command = "enable_all"
-        print("Waiting for motion tools service")
-        rospy.wait_for_service('/robot_toolkit/motion_tools_srv')
-        try:
-            motion = rospy.ServiceProxy('/robot_toolkit/motion_tools_srv', motion_tools_srv)
-            motion(request)
-            print("Motion tools service connected!")
-        except rospy.ServiceException as e:
-            print("Service call failed")
+
+    def wait_for_right_arm_thread(self):
+        while True:
+            if self.tm.right_hand_touched and not self.right_was_touched:
+                req_stiffnesses = set_stiffnesses_srvRequest()
+                req_stiffnesses.names = "RArm"
+                req_stiffnesses.stiffnesses = 0
+                self.right_was_touched = True
+                self.tm.motion_set_stiffnesses_srv(req_stiffnesses)
+                self.tm.talk("Sosten firmemente ahi para mover mi brazo derecho", language="Spanish", wait=True)
+            elif not self.tm.right_hand_touched and self.right_was_touched:
+                req_stiffnesses = set_stiffnesses_srvRequest()
+                req_stiffnesses.names = "RArm"
+                req_stiffnesses.stiffnesses = 1
+                self.right_was_touched = False
+                self.tm.motion_set_stiffnesses_srv(req_stiffnesses)
+                self.tm.talk("Soltaste mi mano derecha", language="Spanish", wait=True)
+            rospy.sleep(1)
+
+    def wait_for_left_arm_thread(self):
+        while True:
+            if self.tm.left_hand_touched and not self.left_was_touched:
+                req_stiffnesses = set_stiffnesses_srvRequest()
+                req_stiffnesses.names = "LArm"
+                req_stiffnesses.stiffnesses = 0
+                self.left_was_touched = True
+                self.tm.motion_set_stiffnesses_srv(req_stiffnesses)
+                self.tm.talk("Sosten firmemente ahi para mover mi brazo izquierdo", language="Spanish", wait=True)
+            elif not self.tm.left_hand_touched and self.left_was_touched:
+                req_stiffnesses = set_stiffnesses_srvRequest()
+                req_stiffnesses.names = "LArm"
+                req_stiffnesses.stiffnesses = 1
+                self.left_was_touched = False
+                self.tm.motion_set_stiffnesses_srv(req_stiffnesses)
+                self.tm.talk("Soltaste mi mano izquierda", language="Spanish", wait=True)
+            rospy.sleep(1)
+                
             
     
     def hey_pepper_function(self):
         self.tm.talk("Dímelo manzana","Spanish",animated=True,wait=False)
         rospy.sleep(1)
         text = self.tm.speech2text_srv(seconds=0,lang="esp")
-        anim_msg = self.gen_anim_msg("Waiting/Think_3")
+        if self.robot_name != "orion":
+            self.tm.play_animation("Waiting/Think_3")
+        elif self.robot_name == "orion":
+            self.tm.play_animation("Sit/Waiting/Think_3")
         self.setLedsColor(255,255,255)
-        self.animationPublisher.publish(anim_msg)
         if not ("None" in text):
             request = f"""La persona dijo: {text}. Si hay palabras en otro idioma en tu respuesta escribelas como se pronunicarian en español porque en este momento solo puedes hablar español y ningun otro idioma, por ejemplo si en tu respuesta esta Python, responde Paiton. No añadas contenido complejo a tu respuesta como codigo, solo explica lo que sea necesario."""
             if "hoy" in text or "día" in text:
@@ -192,15 +189,19 @@ class Evento(object):
                 self.tm.talk("Me encanta bailar!","Spanish",animated=True, wait=True)
                 answer = ""
                 word_msg = speech_recognition_status_msg()
-                options = ["baile", "asereje"]
-                word_msg.status = random.choice(options)
+                word_msg.status = "baile"
                 self.callback_hot_word(word_msg)
             elif "darme la mano" in text.lower() or "dame la mano" in text.lower() or "da la mano" in text.lower():
                 answer = "Claro que si, toma cualquier mano y aprieta suavemente la parte de afuera!"
-            elif "tómame una foto" in text.lower() or "tomame una foto" in text.lower():
+            elif "tómame una foto" in text.lower() or "tomame una foto" in text.lower() or "tómarme una foto" in text.lower() or "tomarme una foto" in text.lower():
                 answer = "fotito!"
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "foto"
+                self.callback_hot_word(word_msg)
+            elif "carro" in text.lower() or "conduce" in text.lower()  or "conducir" in text.lower():
+                answer = "A conducir!"
+                word_msg = speech_recognition_status_msg()
+                word_msg.status = "carro"
                 self.callback_hot_word(word_msg)
             elif "sigue" in text.lower() or "siga" in text.lower() or "sígueme" in text.lower() or "seguirme" in text.lower():
                 answer = ""
@@ -261,17 +262,6 @@ class Evento(object):
             self.tm.hot_word([])
             self.tm.talk("Soltaste mi mano", language="Spanish", wait=True)
 
-    def gen_anim_msg(self, animation):
-        anim_msg = animation_msg()
-        anim_msg.family = "animations"
-        anim_msg.animation_name = animation
-        return anim_msg
-    
-    def dance_threadf(self, number):
-        #Se ponen los bailes en un thread porque estancan la ejecucion y no permiten checkear otras hotwords, como detente
-        self.haciendo_animacion = True
-        self.play_dance_srv(number)
-        self.haciendo_animacion = False
     
     def setLedsColor(self, r,g,b):
         """
@@ -304,54 +294,52 @@ class Evento(object):
             self.haciendo_animacion = True
             if word == "chao":
                 self.is_done = True
-                self.tm.answer_question("", save_conversation=False) 
-            elif word == "guitarra":
-                anim_msg = self.gen_anim_msg("Waiting/AirGuitar_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "besos":
-                anim_msg = self.gen_anim_msg("Gestures/Kisses_1")
-                self.animationPublisher.publish(anim_msg)
-                self.tm.talk("Muah!","Spanish")
-            elif word == "baile":
-                dance_thread = threading.Thread(target=self.dance_threadf,args=[1])
-                dance_thread.start()
-            elif word == "asereje":
-                dance_thread = threading.Thread(target=self.dance_threadf,args=[3])
-                dance_thread.start()
-            elif word == "pose":
-                anim_msg = self.gen_anim_msg("Gestures/ShowSky_8")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "foto":
-                anim_msg = self.gen_anim_msg("Waiting/TakePicture_1")
-                self.animationPublisher.publish(anim_msg)
-                rospy.sleep(2)
-                self.show_picture_proxy()
-            elif word == "cumpleaños":
-                anim_msg = self.gen_anim_msg("Waiting/HappyBirthday_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "corazon":
-                anim_msg = self.gen_anim_msg("Waiting/LoveYou_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "llama":
-                anim_msg = self.gen_anim_msg("Waiting/CallSomeone_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "helicoptero":
-                anim_msg = self.gen_anim_msg("Waiting/Helicopter_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "zombi":
-                anim_msg = self.gen_anim_msg("Waiting/Zombie_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "carro":
-                anim_msg = self.gen_anim_msg("Waiting/DriveCar_1")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "musculos":
-                anim_msg = self.gen_anim_msg("Waiting/ShowMuscles_3")
-                self.animationPublisher.publish(anim_msg)
-            elif word == "gracias":
-                anim_msg = self.gen_anim_msg("Gestures/BowShort_3")
-                self.animationPublisher.publish(anim_msg)
-            if word!="baile" and word!="asereje":
-                self.haciendo_animacion = False
+                self.tm.answer_question("", save_conversation=False)
+            
+            if self.robot_name != "orion":
+                if word == "guitarra":
+                    self.tm.play_animation("Waiting/AirGuitar_1")
+                elif word == "besos":
+                    self.tm.play_animation("Gestures/Kisses_1")
+                    self.tm.talk("Muah!","Spanish")
+                elif word == "baile":
+                    rospy.sleep(1)
+                    options = ["arcadia", "asereje","jgangnamstyle","la_bamba"]
+                    baile = random.choice(options)
+                    print("chosen dance:",baile)
+                    self.tm.play_animation(f"{baile}/full_launcher")
+                elif word == "pose":
+                    self.tm.play_animation("Gestures/ShowSky_8")
+                elif word == "foto":
+                    self.tm.play_animation("Waiting/TakePicture_1")
+                    rospy.sleep(2)
+                    self.show_picture_proxy()
+                elif word == "cumpleaños":
+                    self.tm.play_animation("Waiting/HappyBirthday_1")
+                elif word == "corazon":
+                    self.tm.play_animation("Waiting/LoveYou_1")
+                elif word == "llama":
+                    self.tm.play_animation("Waiting/CallSomeone_1")
+                elif word == "helicoptero":
+                    self.tm.play_animation("Waiting/Helicopter_1")
+                elif word == "zombi":
+                    self.tm.play_animation("Waiting/Zombie_1")
+                elif word == "carro":
+                    self.tm.play_animation("Waiting/DriveCar_1")
+                elif word == "musculos":
+                    self.tm.play_animation("Waiting/ShowMuscles_3")
+                elif word == "gracias":
+                    self.tm.play_animation("Gestures/BowShort_3")
+            elif self.robot_name == "orion":
+                if word == "pose":
+                    self.tm.play_animation("Sit/Gestures/Hey_3")
+                elif word == "foto":
+                    self.tm.play_animation("Sit/Waiting/TakePicture_1")
+                elif word == "llama":
+                    self.tm.play_animation("Sit/Waiting/CallSomeone_1")
+                elif word == "carro":
+                    self.tm.play_animation("Sit/Waiting/DriveCar_1")
+            self.haciendo_animacion = False
     
 # Crear una instancia de la maquina de estados
 if __name__ == "__main__":
