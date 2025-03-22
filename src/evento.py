@@ -204,15 +204,18 @@ class Evento(object):
                 word_msg.status = "carro"
                 self.callback_hot_word(word_msg)
             elif "sigue" in text.lower() or "siga" in text.lower() or "sígueme" in text.lower() or "seguirme" in text.lower():
-                answer = ""
+                if self.robot_name!="orion":
+                    answer = ""
+                else:
+                    answer = "No."
             else:
                 answer=self.tm.answer_question(request, save_conversation=True)
             self.tm.talk(answer,"Spanish",animated=True, wait=True)
-            if "beso" in text.lower():
+            if "beso" in text.lower() and self.robot_name!="orion":
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "beso"
                 self.callback_hot_word(word_msg)
-            elif "gracias" in text.lower():
+            elif "gracias" in text.lower() and self.robot_name!="orion":
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "gracias"
                 self.callback_hot_word(word_msg)
@@ -220,19 +223,19 @@ class Evento(object):
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "pose"
                 self.callback_hot_word(word_msg)
-            elif "musculo" in text.lower():
+            elif "musculo" in text.lower() and self.robot_name!="orion":
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "musculos"
                 self.callback_hot_word(word_msg)
-            elif "zombi" in text.lower():
+            elif "zombi" in text.lower() and self.robot_name!="orion":
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "zombi"
                 self.callback_hot_word(word_msg)
-            elif "guitarra" in text.lower():
+            elif "guitarra" in text.lower() and self.robot_name!="orion":
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "guitarra"
                 self.callback_hot_word(word_msg)
-            elif "sigue" in text.lower() or "siga" in text.lower() or "sígueme" in text.lower() or "seguirme" in text.lower():
+            elif "sigue" in text.lower() or "siga" in text.lower() or "sígueme" in text.lower() or "seguirme" in text.lower() and self.robot_name!="orion":
                 self.tm.talk("Solo te puedo seguir si me dan permiso, para esto deben decirme la contraseña","Spanish",animated=True, wait=True)
                 text = self.tm.speech2text_srv(seconds=0,lang="esp")
                 if "tobi" in text.lower() or "tovi" in text.lower() or "tobbi" in text.lower() or "tovvi" in text.lower() or "tobey" in text.lower()  or "toby" in text.lower() or "tovy" in text.lower()  or "tove" in text.lower() or "tobe" in text.lower() or "toy" in text.lower() or "toi" in text.lower():
