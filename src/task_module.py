@@ -21,7 +21,7 @@ from manipulation_msgs.srv import go_to_pose, move_head
 
 from speech_msgs.srv import q_a_srv, talk_srv, speech2text_srv , talk_srvRequest, speech2text_srvRequest, answer_srv, hot_word_srv
 
-from perception_msgs.srv import img_description_with_gpt_vision_srv, get_first_clothes_color_srv, get_clothes_color_srv, start_recognition_srv, get_labels_srv, start_recognition_srvRequest, look_for_object_srv, look_for_object_srvRequest, save_face_srv,save_face_srvRequest, recognize_face_srv, recognize_face_srvRequest, save_image_srv,save_image_srvRequest, set_model_recognition_srv,set_model_recognition_srvRequest,read_qr_srv,read_qr_srvRequest, filter_labels_by_distance_srv, filter_labels_by_distance_srvRequest,turn_camera_srv,turn_camera_srvRequest,filtered_image_srv,filtered_image_srvRequest,start_pose_recognition_srv, get_person_description_srv, add_recognition_model_srv, add_recognition_model_srvRequest, remove_recognition_model_srv, remove_recognition_model_srvRequest, remove_faces_data_srv, calculate_depth_of_label_srv
+from perception_msgs.srv import img_description_srv, get_first_clothes_color_srv, get_clothes_color_srv, start_recognition_srv, get_labels_srv, start_recognition_srvRequest, look_for_object_srv, look_for_object_srvRequest, save_face_srv,save_face_srvRequest, recognize_face_srv, recognize_face_srvRequest, save_image_srv,save_image_srvRequest, set_model_recognition_srv,set_model_recognition_srvRequest,read_qr_srv,read_qr_srvRequest, filter_labels_by_distance_srv, filter_labels_by_distance_srvRequest,turn_camera_srv,turn_camera_srvRequest,filtered_image_srv,filtered_image_srvRequest,start_pose_recognition_srv, get_person_description_srv, add_recognition_model_srv, add_recognition_model_srvRequest, remove_recognition_model_srv, remove_recognition_model_srvRequest, remove_faces_data_srv, calculate_depth_of_label_srv
 
 from navigation_msgs.srv import set_current_place_srv, set_current_place_srvRequest, go_to_relative_point_srv, go_to_relative_point_srvRequest, go_to_place_srv, go_to_place_srvRequest, start_random_navigation_srv, start_random_navigation_srvRequest, add_place_srv, add_place_srvRequest, add_place_with_coordinates_srv ,add_place_with_coordinates_srvRequest,follow_you_srv, follow_you_srvRequest, robot_stop_srv, robot_stop_srvRequest, spin_srv, spin_srvRequest, go_to_defined_angle_srv, go_to_defined_angle_srvRequest, get_absolute_position_srv, get_absolute_position_srvRequest, get_route_guidance_srv, get_route_guidance_srvRequest, correct_position_srv, correct_position_srvRequest, constant_spin_srv, constant_spin_srvRequest
 from navigation_msgs.msg import simple_feedback_msg
@@ -79,9 +79,16 @@ class Task_module:
         self.iterationssTouched = False
         self.navigation_status = 0
         self.perception = perception
-        self.waiting_touch = False
+        self.waiting_head_touch = False
+        self.waiting_left_touch = False
+        self.waiting_right_touch = False
         self.head_touched = False
         self.hand_touched = False
+        self.left_hand_touched = False
+        self.right_hand_touched = False
+        rospy.init_node("task_utilities")
+        self.robot_name = rospy.get_param("/task_utilities/robot_name","nova")
+        print("robot name IS",self.robot_name)
         if perception:
             print(
                 self.consoleFormatter.format(
@@ -455,34 +462,76 @@ class Task_module:
 
         self.pytoolkit = pytoolkit
         if pytoolkit:
-            
-            print(self.consoleFormatter.format("Waiting for pytoolkit/ALMotion/set_stiffnesses_srv...", "WARNING"))
-            rospy.wait_for_service("pytoolkit/ALMotion/set_stiffnesses_srv")
-            self.motion_set_stiffnesses_srv = rospy.ServiceProxy("pytoolkit/ALMotion/set_stiffnesses_srv", set_stiffnesses_srv)
-            
-
-            print(self.consoleFormatter.format("Waiting for pytoolkit/ALAudioDevice/set_output_volume_srv...", "WARNING"))
-            rospy.wait_for_service("/pytoolkit/ALAudioDevice/set_output_volume_srv")
-            self.set_volume = rospy.ServiceProxy("/pytoolkit/ALAudioDevice/set_output_volume_srv", set_output_volume_srv)
-            
             print(
                 self.consoleFormatter.format(
                     "Waiting for PYTOOLKIT services...", "WARNING"
                 )
             )
             
-            print(
-                self.consoleFormatter.format(
-                    "Waiting for /pytoolkit/ALTabletService/show_web_view_srv...",
-                    "WARNING",
+            print(self.consoleFormatter.format("Waiting for pytoolkit/ALMotion/set_stiffnesses_srv...", "WARNING"))
+            rospy.wait_for_service("pytoolkit/ALMotion/set_stiffnesses_srv")
+            self.motion_set_stiffnesses_srv = rospy.ServiceProxy("pytoolkit/ALMotion/set_stiffnesses_srv", set_stiffnesses_srv)
+            
+
+            print(self.consoleFormatter.format("Waiting for pytoolkit/ALMotion/set_arms_security_srv...", "WARNING"))
+            rospy.wait_for_service("pytoolkit/ALMotion/set_arms_security_srv")
+            self.set_arms_security = rospy.ServiceProxy("pytoolkit/ALMotion/set_arms_security_srv", SetBool)
+            
+            
+            print(self.consoleFormatter.format("Waiting for pytoolkit/ALAudioDevice/set_output_volume_srv...", "WARNING"))
+            rospy.wait_for_service("/pytoolkit/ALAudioDevice/set_output_volume_srv")
+            self.set_volume = rospy.ServiceProxy("/pytoolkit/ALAudioDevice/set_output_volume_srv", set_output_volume_srv)
+            
+            if self.robot_name != "orion":
+                
+                print(
+                    self.consoleFormatter.format(
+                        "Waiting for /pytoolkit/ALTabletService/show_web_view_srv...",
+                        "WARNING",
+                    )
                 )
-            )
-            rospy.wait_for_service("/pytoolkit/ALTabletService/show_web_view_srv")
-            self.show_web_proxy = rospy.ServiceProxy(
-                "/pytoolkit/ALTabletService/show_web_view_srv", tablet_service_srv
-            )
+                rospy.wait_for_service("/pytoolkit/ALTabletService/show_web_view_srv")
+                self.show_web_proxy = rospy.ServiceProxy(
+                    "/pytoolkit/ALTabletService/show_web_view_srv", tablet_service_srv
+                )
+            
+                print(
+                    self.consoleFormatter.format(
+                        "Waiting for /pytoolkit/ALTabletService/show_image_srv...",
+                        "WARNING",
+                    )
+                )
+                rospy.wait_for_service("/pytoolkit/ALTabletService/show_image_srv")
+                self.show_image_proxy = rospy.ServiceProxy(
+                    "/pytoolkit/ALTabletService/show_image_srv", tablet_service_srv
+                )
+                
+                
+                print(self.consoleFormatter.format("Waiting for /pytoolkit/ALTabletService/hide_srv...", "WARNING"))
+                rospy.wait_for_service("/pytoolkit/ALTabletService/hide_srv")
+                self.hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
+                
+                print(self.consoleFormatter.format("Waiting for /pytoolkit/ALTabletService/play_video_srv...", "WARNING"))
+                rospy.wait_for_service("/pytoolkit/ALTabletService/play_video_srv")
+                self.show_video_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/play_video_srv",tablet_service_srv)
+
+                print(self.consoleFormatter.format("Waiting for pytoolkit/show_topic...", "WARNING"))
+                rospy.wait_for_service("/pytoolkit/ALTabletService/show_topic_srv")
+                self.show_topic_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/show_topic_srv", tablet_service_srv)
+                print(
+                self.consoleFormatter.format(
+                    "Waiting for pytoolkit/show_words...", "WARNING"
+                )
+                )
+                rospy.wait_for_service("/pytoolkit/ALTabletService/show_words_srv")
+                self.show_words_proxy = rospy.ServiceProxy(
+                    "/pytoolkit/ALTabletService/show_words_srv", battery_service_srv
+                )
             
             
+                print(self.consoleFormatter.format("Waiting for pytoolkit/ALTabletService/show_picture_srv...", "WARNING"))
+                rospy.wait_for_service('pytoolkit/ALTabletService/show_picture_srv')
+                self.show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_srv', battery_service_srv)
             
             print(
                 self.consoleFormatter.format(
@@ -549,38 +598,6 @@ class Task_module:
             print(self.consoleFormatter.format("Waiting for pytoolkit/ALMotion/set_tangential_security_distance_srv...", "WARNING"))
             rospy.wait_for_service("/pytoolkit/ALMotion/set_tangential_security_distance_srv")
             self.set_tangential_security_srv = rospy.ServiceProxy("/pytoolkit/ALMotion/set_tangential_security_distance_srv",set_security_distance_srv)
-            print(
-                self.consoleFormatter.format(
-                    "Waiting for pytoolkit/show_words...", "WARNING"
-                )
-            )
-            rospy.wait_for_service("/pytoolkit/ALTabletService/show_words_srv")
-            self.show_words_proxy = rospy.ServiceProxy(
-                "/pytoolkit/ALTabletService/show_words_srv", battery_service_srv
-            )
-            print(
-                self.consoleFormatter.format(
-                    "Waiting for /pytoolkit/ALTabletService/show_image_srv...",
-                    "WARNING",
-                )
-            )
-            rospy.wait_for_service("/pytoolkit/ALTabletService/show_image_srv")
-            self.show_image_proxy = rospy.ServiceProxy(
-                "/pytoolkit/ALTabletService/show_image_srv", tablet_service_srv
-            )
-            
-            
-            print(self.consoleFormatter.format("Waiting for /pytoolkit/ALTabletService/hide_srv...", "WARNING"))
-            rospy.wait_for_service("/pytoolkit/ALTabletService/hide_srv")
-            self.hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
-            
-            print(self.consoleFormatter.format("Waiting for /pytoolkit/ALTabletService/play_video_srv...", "WARNING"))
-            rospy.wait_for_service("/pytoolkit/ALTabletService/play_video_srv")
-            self.show_video_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/play_video_srv",tablet_service_srv)
-
-            print(self.consoleFormatter.format("Waiting for pytoolkit/show_topic...", "WARNING"))
-            rospy.wait_for_service("/pytoolkit/ALTabletService/show_topic_srv")
-            self.show_topic_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/show_topic_srv", tablet_service_srv)
             
             rospy.wait_for_service("/pytoolkit/ALMotion/set_security_distance_srv")
             self.set_security_distance_proxy = rospy.ServiceProxy("/pytoolkit/ALMotion/set_security_distance_srv", set_security_distance_srv)
@@ -602,17 +619,25 @@ class Task_module:
             rospy.wait_for_service("/pytoolkit/ALTracker/start_follow_face")
             self.start_follow_face_proxy = rospy.ServiceProxy("/pytoolkit/ALTracker/start_follow_face",battery_service_srv)
             
+            print(self.consoleFormatter.format("Waiting for /pytoolkit/ALMotion/toggle_breathing_srv...", "WARNING"))
+            rospy.wait_for_service("/pytoolkit/ALMotion/toggle_breathing_srv")
+            self.toggle_breathing_proxy = rospy.ServiceProxy("/pytoolkit/ALMotion/toggle_breathing_srv", set_open_close_hand_srv)
+        
+            # PYTOOLKIT Suscribers
+            
             self.move_publisher = rospy.Publisher('/pytoolkit/ALMotion/move', Twist, queue_size=10)
-            
-            self.animationPublisher = rospy.Publisher('/animations', animation_msg, queue_size=10)
-            
-            self.ledsPublisher = rospy.Publisher('/leds', leds_parameters_msg, queue_size=10)
-            
             self.subscriber_angles = rospy.Subscriber("/pytoolkit/ALMotion/get_angles",set_angles_msg,self.callback_get_angles)
             
-            self.SensorSubscriber = rospy.Subscriber("/touch", touch_msg, self.callback_sensor_subscriber)
-
+            
+            
             print(self.consoleFormatter.format("PYTOOLKIT services enabled", "OKGREEN"))
+           
+        # SUBSCRIBERS
+        self.animationPublisher = rospy.Publisher('/animations', animation_msg, queue_size=10)
+            
+        self.ledsPublisher = rospy.Publisher('/leds', leds_parameters_msg, queue_size=10)
+        
+        self.SensorSubscriber = rospy.Subscriber("/touch", touch_msg, self.callback_sensor_subscriber)
 
     #################################### SERVICES #######################################
 
@@ -620,7 +645,8 @@ class Task_module:
         """
         Initialized the node with the name of the task
         """
-        rospy.init_node("task_node")
+        pass
+        
 
     def initialize_pepper(self):
         """
@@ -632,11 +658,14 @@ class Task_module:
         else:
             print("perception as false")
         if self.pytoolkit:
-            self.enable_security_proxy()
-            self.show_words_proxy()
-            self.setRPosture_srv("stand")
-            self.set_orthogonal_security_srv(0.3)
-            self.set_tangential_security_srv(0.05)
+            if self.robot_name == "nova" or self.robot_name == "opera":
+                self.enable_security_proxy()
+                self.show_words_proxy()
+                self.setRPosture_srv("stand")
+                self.set_orthogonal_security_srv(0.3)
+                self.set_tangential_security_srv(0.05)
+            elif self.robot_name == "orion":
+                self.setRPosture_srv("stand")
         else:
             print("pytoolkit as false")
 
@@ -873,7 +902,7 @@ class Task_module:
         """
         first_time = True
         self.head_touched = False
-        self.waiting_touch = True
+        self.waiting_head_touch = True
         start_time = rospy.get_time()
         last_talk_time = rospy.get_time()
         while (not self.head_touched) and rospy.get_time() - start_time < timeout:
@@ -884,34 +913,74 @@ class Task_module:
             if first_time:
                 first_time = False
         result = self.head_touched
-        self.waiting_touch = False
+        self.waiting_head_touch = False
+        self.head_touched = False
         return result
 
-    def wait_for_arm_touch(self, timeout = 15, message = "", message_interval = 5):
+    def wait_for_arm_touch(self, timeout = 15, message = "", message_interval = 5,language="English",arm="both"):
         """
         Input:
         timeout: The time until the robot stops waiting
         message: The message the robot should repeat every x seconds
         message_interval: The time the robot should wait between talks
-        Output: True if the robot head was touched, False if timeout
+        Output: True if the robot arm was touched, False if timeout
         ----------
         Waits until the robots arm is touched or a timeout
         """
         first_time = True
         self.hand_touched = False
-        self.waiting_touch = True
+        self.left_hand_touched = False
+        self.right_hand_touched = False
         start_time = rospy.get_time()
         last_talk_time = rospy.get_time()
-        while (not self.hand_touched) and rospy.get_time() - start_time < timeout:
-            rospy.sleep(0.1)
-            if rospy.get_time()-last_talk_time > message_interval and not first_time:
-                self.talk(message,"English",wait=True)
-                last_talk_time = rospy.get_time()
-            if first_time:
-                first_time = False
-        result = self.hand_touched
-        self.waiting_touch = False
-        return result
+        if arm == "both":
+            self.waiting_right_touch = True
+            self.waiting_left_touch = True
+            while (not self.hand_touched) and rospy.get_time() - start_time < timeout:
+                rospy.sleep(0.1)
+                if rospy.get_time()-last_talk_time > message_interval and not first_time:
+                    self.talk(message,language,wait=True)
+                    last_talk_time = rospy.get_time()
+                if first_time:
+                    first_time = False
+            result = self.hand_touched
+            self.waiting_right_touch = False
+            self.waiting_left_touch = False
+            self.hand_touched = False
+            self.left_hand_touched = False
+            self.right_hand_touched = False
+            return result
+        elif arm == "left":
+            self.waiting_left_touch = True
+            while (not self.left_hand_touched) and rospy.get_time() - start_time < timeout:
+                rospy.sleep(0.1)
+                if rospy.get_time()-last_talk_time > message_interval and not first_time:
+                    self.talk(message,language,wait=True)
+                    last_talk_time = rospy.get_time()
+                if first_time:
+                    first_time = False
+            result = self.left_hand_touched
+            self.waiting_left_touch = False
+            self.hand_touched = False
+            self.left_hand_touched = False
+            self.right_hand_touched = False
+            return result
+            
+        elif arm == "right":
+            self.waiting_right_touch = True
+            while (not self.right_hand_touched) and rospy.get_time() - start_time < timeout:
+                rospy.sleep(0.1)
+                if rospy.get_time()-last_talk_time > message_interval and not first_time:
+                    self.talk(message,language,wait=True)
+                    last_talk_time = rospy.get_time()
+                if first_time:
+                    first_time = False
+            result = self.right_hand_touched
+            self.waiting_right_touch = False
+            self.hand_touched = False
+            self.left_hand_touched = False
+            self.right_hand_touched = False
+            return result
 
     def search_for_specific_person(self, class_type: str, specific_characteristic: str,true_check=False) -> bool:
         """
@@ -1699,7 +1768,7 @@ class Task_module:
                     self.talk("I will start rotating, please stand in the direction you want me to follow you and wait until i look at you and touch my head!",language="English",wait=False)
                     self.constant_spin_srv(15)
                     self.head_touched = False
-                    self.waiting_touch = True
+                    self.waiting_head_touch = True
                     last_talk_time = rospy.get_time()
                     start_time = rospy.get_time()
                     while (not self.head_touched) and rospy.get_time() - start_time < 15:
@@ -1707,7 +1776,7 @@ class Task_module:
                             self.talk("Touch my head to get going!","English",wait=False)
                             last_talk_time = rospy.get_time()
                     self.robot_stop_srv()
-                    self.waiting_touch = False
+                    self.waiting_head_touch = False
                     self.start_yolo_awareness(True)
                 follow_thread = Thread(target=self.follow_you_srv_thread,args=([speed,awareness,avoid_obstacles]))
                 follow_thread.start()
@@ -1715,7 +1784,7 @@ class Task_module:
                 person_thread.start()
                 self.talk("I will follow you now! Please touch my head when we arrive. If i can't see you anymore please come back!", "English",wait=False)
                 self.head_touched = False
-                self.waiting_touch = True
+                self.waiting_head_touch = True
                 last_talk_time = rospy.get_time()
                 start_time = rospy.get_time()
                 print("Started following")
@@ -1723,7 +1792,7 @@ class Task_module:
                     if rospy.get_time()-last_talk_time > 15:
                         self.talk("Remember to touch my head when we arrive","English",wait=True)
                         last_talk_time = rospy.get_time()
-                self.waiting_touch = False
+                self.waiting_head_touch = False
                 self.start_yolo_awareness(False)
                 self.set_move_arms_enabled(True)
                 self.follow_you_active = False
@@ -2547,6 +2616,7 @@ class Task_module:
         anim_msg.family = "animations"
         anim_msg.animation_name = animation_name
         self.animationPublisher.publish(anim_msg)
+        rospy.Timer(rospy.Duration(5), lambda event: self.setLedsColor(255, 255, 255), oneshot=True)
 
     def set_angles_srv(self, joints: list, angles:list, speed:float) -> bool:
         """
@@ -2624,36 +2694,7 @@ class Task_module:
         else:
             print("pytoolkit as false")
             return False
-
-    ################ SUBSCRIBER CALLBACKS ################
-
-    def callback_look_for_object(self, data):
-        self.object_found = data.data
-        return data
-
-    def callback_simple_feedback_subscriber(self, msg):
-        self.navigation_status = msg.navigation_status
-
-    def callback_sensor_subscriber(self, msg: touch_msg):
-        if "head" in msg.name:
-            if self.waiting_touch:
-                if msg.state:
-                    self.head_touched = msg.state
-            else:
-                self.head_touched = msg.state
-        elif "hand_left_back" in msg.name:
-            if self.waiting_touch:
-                if msg.state:
-                    self.hand_touched = msg.state
-            else:
-                self.hand_touched = msg.state
-        elif "hand_right_back" in msg.name:  
-            if self.waiting_touch:
-                if msg.state:
-                    self.hand_touched = msg.state
-            else:
-                self.hand_touched = msg.state
-                
+        
     def setLedsColor(self,r,g,b):
         """
         Function for setting the colors of the eyes of the robot.
@@ -2671,6 +2712,60 @@ class Task_module:
         ledsMessage.time = 0
         self.ledsPublisher.publish(ledsMessage)
         rospy.sleep(0.2)
+
+    def enable_breathing_service(self, chain, state):
+        """
+        Enables the breathing animations of the robot.
+        """
+        request = set_open_close_hand_srvRequest()
+        request.hand = chain  # can be All, Body, Legs, Arms, LArm, RArm, Head
+        request.state = str(state)  # can be True or False
+        self.toggle_breathing_proxy(request)
+
+
+    def gen_anim_msg(self, animation):
+        """
+        Generates an animation message to publish in the /animations topic for the robot to play that behaviour
+        """
+        
+        anim_msg = animation_msg()
+        anim_msg.family = "animations"
+        anim_msg.animation_name = animation
+        return anim_msg
+    
+    ################ SUBSCRIBER CALLBACKS ################
+
+    def callback_look_for_object(self, data):
+        self.object_found = data.data
+        return data
+
+    def callback_simple_feedback_subscriber(self, msg):
+        self.navigation_status = msg.navigation_status
+
+    def callback_sensor_subscriber(self, msg: touch_msg):
+        if "head" in msg.name:
+            if self.waiting_head_touch:
+                if msg.state:
+                    self.head_touched = msg.state
+            else:
+                self.head_touched = msg.state
+        elif "hand_left_back" in msg.name:
+            if self.waiting_left_touch:
+                if msg.state:
+                    self.hand_touched = msg.state
+                    self.left_hand_touched = msg.state
+            else:
+                self.hand_touched = msg.state
+                self.left_hand_touched = msg.state
+        elif "hand_right_back" in msg.name:  
+            if self.waiting_right_touch:
+                if msg.state:
+                    self.hand_touched = msg.state
+                    self.right_hand_touched = msg.state
+            else:
+                self.hand_touched = msg.state
+                self.right_hand_touched = msg.state
+    
 
     def callback_move_failed(self, msg):
         if not self.avoiding_obstacle:
