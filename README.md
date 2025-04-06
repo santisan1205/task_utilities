@@ -29,6 +29,11 @@ git clone https://github.com/SinfonIAUniandes/speech_utilities.git
 git clone https://github.com/SinfonIAUniandes/navigation_utilities.git
 git clone https://github.com/SinfonIAUniandes/perception_utilities.git
 git clone https://github.com/SinfonIAUniandes/task_utilities.git
+git clone https://github.com/SinfonIAUniandes/perception_msgs.git
+git clone https://github.com/SinfonIAUniandes/robot_toolkit_msgs.git
+git clone https://github.com/SinfonIAUniandes/navigation_msgs.git
+git clone https://github.com/SinfonIAUniandes/manipulation_msgs.git
+git clone https://github.com/SinfonIAUniandes/speech_msgs.git
 ```
 
 Después, compile el workspace:
