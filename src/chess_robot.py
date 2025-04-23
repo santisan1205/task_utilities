@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
+import chess
 from transitions import Machine
 from task_module import Task_module as tm
 import ConsoleFormatter
-import time
 import threading
 import rospy
 import os
-from robot_toolkit_msgs.msg import speech_recognition_status_msg, animation_msg, motion_tools_msg, leds_parameters_msg, touch_msg
-import chess
 #pip install chess
 
 
@@ -19,14 +17,14 @@ class Chess(object):
         self.new_game = False
 
         states =  ["CHESS", "INIT", "WAIT4GUEST"]
-        self.tm = tm(perception = True ,speech=True, manipulation=True, pytoolkit=True)
+        self.tm = tm(perception = False ,speech=True, manipulation=False, pytoolkit=True)
         self.tm.initialize_node(self.task_name)
         
         #Definir transiciones
         transitions = [
             {"trigger": "start", "source": "CHESS", "dest": "INIT"},
             {"trigger": "begin", "source": "INIT", "dest": "WAIT4GUEST"},
-            {"trigger": "new_game", "source": "WAIT4GUEST", "dest": "CHESS"},
+            {"trigger": "newGame", "source": "WAIT4GUEST", "dest": "CHESS"},
             {"trigger": "finish", "source": "CHESS", "dest": "WAIT4GUEST"},
         ]
 
@@ -38,26 +36,25 @@ class Chess(object):
         print(self.consoleFormatter.format("Inicializacion del task: "+self.task_name, "HEADER"))
         self.tm.initialize_pepper()
         
-        #TOCA CABEZA
-        while not tm.wait_for_head_touch(timeout=20, message="Toca mi cabeza para jugar", message_interval=5, language="Spanish"):
-            self.new_game = True
-
-        subscriber = rospy.Subscriber("/pytoolkit/ALSpeechRecognition/status",speech_recognition_status_msg,self.callback_hot_word)
-        self.tm.motion_tools_service()
-        self.tm.enable_breathing_service()
+        #self.tm.enable_breathing_service() 
+        
         self.begin()
 
     def on_enter_WAIT4GUEST(self):
         print(self.consoleFormatter.format("WAIT4GUEST", "HEADER"))
+        #TOCA CABEZA
+        
+        while not self.tm.wait_for_head_touch(timeout=20, message="Toca mi cabeza para jugar", message_interval=5, language="Spanish"):
+            self.new_game = True
+        self.tm.motion_tools_service()
         self.board = chess.Board()
+        
         self.mate = False
-        while not self.new_game:
-            rospy.sleep(0.1)
 
         # Establecer conexion con stockFish
 
         self.tm.talk("Ya estoy lista para jugar!", "Spanish", wait=True)
-        self.new_game()
+        self.newGame()
 
     def on_enter_CHESS(self):
         print(self.consoleFormatter.format("CHESS", "HEADER"))
@@ -73,14 +70,15 @@ class Chess(object):
             #Asumo caso de FEN
             fen_nuevo = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
 
-            move = self.detect_move_from_fens(self ,fen_actual, fen_nuevo)
-            move_text = self.movement(self, move, fen_actual)
+            move = self.detect_move_from_fens(fen_actual, fen_nuevo)
+            move_text = self.movement(move, fen_actual)
 
             self.tm.talk(move_text, "Spanish",animated=False, wait=True)
             
             #QUITAR OBVIAMENTE
             self.mate = True
-
+            
+        self.new_game= False
         self.finish()
 
 
@@ -111,7 +109,7 @@ class Chess(object):
         board.push(chess_move)
         
         # Translate the move
-        translation = self.translate_move(self, move, piece, is_capture, target_square, captured_piece, 
+        translation = self.translate_move(move, piece, is_capture, target_square, captured_piece, 
                                     self.board.is_check(), self.board.is_checkmate(), language)
         
         return translation
@@ -123,8 +121,8 @@ class Chess(object):
         Returns the move in SAN (Standard Algebraic Notation), e.g., "e4", "Nf3", etc.
         If move is not found, returns an empty string.
         """
-        board_before = self.Board(fenActual)
-        board_after = self.Board(fenNuevo)
+        board_before = chess.Board(fenActual)
+        board_after = chess.Board(fenNuevo)
 
         for move in board_before.legal_moves:
             board_copy = board_before.copy()
