@@ -41,6 +41,8 @@ class PREGUNTADOS(object):
         self.tm.enable_breathing_service(chain="Head",state=False)
         self.tm.motion_tools_service()
         self.tm.start_tracker_proxy()
+        self.tm.show_words_proxy()
+        rospy.sleep(5)
 
         self.machine = Machine(model=self, states=states, transitions=transitions, initial='INICIO')
         rospy_check = threading.Thread(target=self.check_rospy)
@@ -65,9 +67,14 @@ class PREGUNTADOS(object):
 
     def on_enter_DAR_FEEDBACK(self):
         print(self.consoleFormatter.format("DAR_FEEDBACK", "HEADER"))
-        if self.user_answer.lower() in self.current_question["a"]:
+        if "none" in self.user_answer:
+            self.tm.talk(text="Disculpa, no te entendi. Repite tu respuesta", language="Spanish",animated=False)
+            response = self.tm.speech2text_srv(seconds=0, lang="esp")
+            self.user_answer = response.lower().strip()
+        if self.current_question["a"] in self.user_answer:
             self.tm.play_animation(animation_name="Emotions/Positive/Winner_2")
-            self.tm.talk(text="¡Correcto! Muy bien hecho.", language="Spanish",animated=False)
+            self.tm.talk(text="¡Correcto! Muy bien hecho.", language="Spanish",animated=False,wait=True)
+            rospy.sleep(2)
             self.correct_answers += 1
         else:
             self.tm.talk(text=f"¡Uy! La respuesta correcta era {self.current_question['a']}.", language="Spanish",animated=True)
