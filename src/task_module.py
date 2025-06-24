@@ -1092,7 +1092,7 @@ class Task_module:
         Spins while looking for <object_name> for <timeout> seconds while spinning at 15 deg/s
         """
         # spins until the object is found or timeout
-        if self.perception and self.navigation and self.manipulation:
+        if self.perception and self.manipulation:
             try:
                 angles_to_check = [0,-60,60]
                 self.setRPosture_srv("stand")
@@ -1128,7 +1128,7 @@ class Task_module:
         ----------
         Spins 360 degrees and then returns the number of objects of <object_name> seen
         """
-        if self.perception and self.navigation and self.manipulation and self.pytoolkit:
+        if self.perception and self.manipulation and self.pytoolkit:
             try:
                 self.setRPosture_srv("stand")
                 angles_to_check = [0]
