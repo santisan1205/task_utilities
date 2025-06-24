@@ -108,8 +108,8 @@ class Evento(object):
             self.tm.enable_breathing_service(chain="Head",state=False)
             self.tm.stop_tracker_proxy()
             self.tm.setMoveHead_srv.call("up")
-        threading.Thread(target=self.wait_for_right_arm_thread, daemon=True).start()
-        threading.Thread(target=self.wait_for_left_arm_thread, daemon=True).start()
+        #threading.Thread(target=self.wait_for_right_arm_thread, daemon=True).start()
+        #threading.Thread(target=self.wait_for_left_arm_thread, daemon=True).start()
         
         self.person_arrived()
 
