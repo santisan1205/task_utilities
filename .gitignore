@@ -7,3 +7,4 @@ config.pkl
 .vscode/*
 .src/__pycache__/*
 *pyc
+src/__pycache__/ConsoleFormatter.cpython-38.pyc
