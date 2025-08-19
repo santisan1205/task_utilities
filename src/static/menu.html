@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tirant Prime</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
     <div class="centered">
-        <h1 class="main-title">Tirant Prime</h1>
+      <!-- Reemplazar el título por el logo -->
+      <img
+        src="assets/Tirant-Prime-Conversa.png"
+        alt="Tirant Prime Logo"
+        class="main-logo"
+      />
+      <div class="button-container">
         <button class="btn" onclick="funcion_robot('dance')">Bailar</button>
         <button class="btn" onclick="funcion_robot('pose')">Posar</button>
         <button class="btn" onclick="funcion_robot('foto')">Tomar foto</button>
-        <a class="esquina" href="index.html"><img src="casa.svg" width="50px"></a>
+      </div>
+
+      <a class="esquina" href="index.html"
+        ><img src="assets/casa.svg" width="50px"
+      /></a>
     </div>
     <script>
-        function funcion_robot(val) {
-            fetch('http://157.253.113.209:8000/action?action=' + val, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-        }
+      function funcion_robot(val) {
+        fetch("http://157.253.113.209:8000/action?action=" + val, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
+
