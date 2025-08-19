@@ -6,8 +6,9 @@ from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import uvicorn
+import threading
 from robot_toolkit_msgs.msg import speech_msg, text_to_speech_status_msg, audio_tools_msg, animation_msg, leds_parameters_msg, motion_tools_msg
-from robot_toolkit_msgs.srv import audio_tools_srv, set_open_close_hand_srv, set_open_close_hand_srvRequest, motion_tools_srv, battery_service_srv
+from robot_toolkit_msgs.srv import audio_tools_srv, set_open_close_hand_srv, set_open_close_hand_srvRequest, motion_tools_srv, battery_service_srv, tablet_service_srv
 
 # Initialize ROS node
 rospy.init_node("tablet_evento_node")
@@ -72,6 +73,10 @@ leds_pub = rospy.Publisher('/leds', leds_parameters_msg, queue_size=10)
 
 
 show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_srv', battery_service_srv)
+show_web_view_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_web_view_srv', tablet_service_srv)
+hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
+show_picture_proxy()
+show_web_view_proxy("http://157.253.113.200:8000/index.html")
 
 robot_speaking = False
 robot_name = rospy.get_param("~robot_name", "pepper")
@@ -144,16 +149,23 @@ async def main_page():
     """
     return RedirectResponse(url="/static/evento_martes.html")
 
+# Lock para asegurar solo una acción en curso
+action_lock = threading.Lock()
+
 @app.post("/action", response_class=HTMLResponse)
 @app.head("/action", response_class=HTMLResponse)
 async def handle_action(action: str):
     """
-    Handles actions from the web page and redirects back to the same page.
+    Handles actions from the web page and ensures only one action runs at a time.
     """
-    if action:
-        #form_data = await request.form()
-        #action = form_data.get('action')
-        
+    if not action:
+        return HTMLResponse("No action provided", status_code=400)
+
+    # Intentar adquirir el lock sin bloquear. Si falla, devolver 409.
+    if not action_lock.acquire(blocking=False):
+        return HTMLResponse("Another action is running", status_code=409)
+
+    try:
         if action == "greet":
             print("Action received: greet")
             talk("Hola! Soy Nova y vengo del universo Tirant Praim, para presentarte su nueva solución. Tirant praim Conversa. La IA jurídica más precisa y fiable. Descubra rápidamente de todo lo que es capaz de realizar", "Spanish")
@@ -162,7 +174,10 @@ async def handle_action(action: str):
             play_animation("disco/full_launcher")
         elif action == "acabo_hablar":
             print("Action received: acabo_hablar")
+            show_web_view_proxy("http://157.253.113.200:8000/menu.html")
             talk("Ahora que conoces brevemente de lo que es capaz de hacer. Es momento de que lo pruebes en directo. Acércate a los peces y realiza cualquier consulta jurídica y descubre todo el potencial de Tirant praim Conversa!", "Spanish")
+            rospy.sleep(30)
+            show_web_view_proxy("http://157.253.113.200:8000/index.html")
         elif action == "pose":
             talk("Tomemonos una foto, voy a posar", "Spanish", animated=False)
             enable_breathing("All", False)
@@ -173,12 +188,20 @@ async def handle_action(action: str):
             enable_breathing("All", True)
         elif action == "foto":
             print("Action received: foto")
-            talk("Te tomo una fotito!")
+            talk("Te tomo una fotito!", "Spanish", animated=False)
             play_animation("Waiting/TakePicture_1")
+            hide_proxy()
             rospy.sleep(2)
             show_picture_proxy()
+            rospy.sleep(5)
+            show_web_view_proxy("http://157.253.113.200:8000/menu.html")
+        else:
+            return HTMLResponse(f"Unknown action: {action}", status_code=400)
 
-    return None
+        return HTMLResponse("{}", status_code=200)
+    finally:
+        # Siempre liberar el lock
+        action_lock.release()
 
 if __name__ == "__main__":
     """
