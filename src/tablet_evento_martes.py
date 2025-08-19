@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import rospy
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse, HTMLResponse
@@ -8,7 +9,7 @@ import os
 import uvicorn
 import threading
 from robot_toolkit_msgs.msg import speech_msg, text_to_speech_status_msg, audio_tools_msg, animation_msg, leds_parameters_msg, motion_tools_msg
-from robot_toolkit_msgs.srv import audio_tools_srv, set_open_close_hand_srv, set_open_close_hand_srvRequest, motion_tools_srv, battery_service_srv, tablet_service_srv
+from robot_toolkit_msgs.srv import audio_tools_srv, set_open_close_hand_srv, set_open_close_hand_srvRequest, motion_tools_srv, battery_service_srv, tablet_service_srv, tablet_service_srvRequest
 
 # Initialize ROS node
 rospy.init_node("tablet_evento_node")
@@ -76,7 +77,12 @@ show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_
 show_web_view_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_web_view_srv', tablet_service_srv)
 hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
 show_picture_proxy()
-show_web_view_proxy("http://157.253.113.200:8000/index.html")
+local_ip = "157.253.113.209"
+
+def show_website(web_url):
+    request = tablet_service_srvRequest()
+    request.url = web_url
+    approved = show_web_view_proxy(request)
 
 robot_speaking = False
 robot_name = rospy.get_param("~robot_name", "pepper")
@@ -120,6 +126,11 @@ def play_animation(animation_name):
         rospy.logerr(f"Failed to play animation '{animation_name}': {e}")
 
 app = FastAPI()
+
+@app.on_event("startup")
+async def lifespan():
+    show_website(f"http://{local_ip}:8000/static/index.html")
+
 
 # Configure CORS
 _allowed_origins = os.getenv("CORS_ORIGINS", "*")
@@ -174,10 +185,10 @@ async def handle_action(action: str):
             play_animation("disco/full_launcher")
         elif action == "acabo_hablar":
             print("Action received: acabo_hablar")
-            show_web_view_proxy("http://157.253.113.200:8000/menu.html")
+            show_website(f"http://{local_ip}:8000/static/menu.html")
             talk("Ahora que conoces brevemente de lo que es capaz de hacer. Es momento de que lo pruebes en directo. Acércate a los peces y realiza cualquier consulta jurídica y descubre todo el potencial de Tirant praim Conversa!", "Spanish")
             rospy.sleep(30)
-            show_web_view_proxy("http://157.253.113.200:8000/index.html")
+            show_website(f"http://{local_ip}:8000/static/index.html")
         elif action == "pose":
             talk("Tomemonos una foto, voy a posar", "Spanish", animated=False)
             enable_breathing("All", False)
@@ -194,7 +205,7 @@ async def handle_action(action: str):
             rospy.sleep(2)
             show_picture_proxy()
             rospy.sleep(5)
-            show_web_view_proxy("http://157.253.113.200:8000/menu.html")
+            show_website(f"http://{local_ip}:8000/static/menu.html")
         else:
             return HTMLResponse(f"Unknown action: {action}", status_code=400)
 

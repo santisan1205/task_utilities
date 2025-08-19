@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirant prime</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="centered">
+        <button class="main-title" onclick="funcion_robot('greet')">¡HOLA!</h1>
+        <a class="btn" href="video.html">Descubrir conversa</a>
+    </div>
+    <script>
+        function funcion_robot(val) {
+            fetch('http://157.253.113.209:8000/action?action=' + val, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+        }
+    </script>
+</body>
+</html>

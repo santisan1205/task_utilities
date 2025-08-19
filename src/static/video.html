@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirant prime</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <video autoplay playsinline onended="funcion_robot('acabo_hablar')" preload="metadata" class="video">
+        <source src="http://157.253.113.209:8000/static/wh3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        function funcion_robot(val) {
+            fetch('http://157.253.113.209:8000/action?action=' + val, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            document.querySelector('body').innerHTML = "";
+        }
+    </script>
+</body>
+</html>
