@@ -76,7 +76,7 @@ show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_
 show_web_view_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_web_view_srv', tablet_service_srv)
 hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
 show_picture_proxy()
-local_ip = "157.253.113.200"
+local_ip = "157.253.113.209"
 
 def show_website(web_url):
     request = tablet_service_srvRequest()
@@ -179,7 +179,7 @@ async def handle_action(action: str):
             print("Action received: acabo_hablar")
             show_website(f"http://{local_ip}:8000/menu.html")
             talk("Ahora que conoces brevemente de lo que es capaz de hacer. Es momento de que lo pruebes en directo. Acércate a los peces y realiza cualquier consulta jurídica y descubre todo el potencial de Tirant praim Conversa!", "Spanish")
-            rospy.sleep(60)
+            rospy.sleep(120)
             show_website(f"http://{local_ip}:8000/index.html")
         elif action == "pose":
             talk("Tomemonos una foto, voy a posar", "Spanish", animated=False)
