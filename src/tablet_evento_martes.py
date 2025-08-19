@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import rospy
-from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse, HTMLResponse
@@ -77,12 +76,14 @@ show_picture_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_picture_
 show_web_view_proxy = rospy.ServiceProxy('pytoolkit/ALTabletService/show_web_view_srv', tablet_service_srv)
 hide_proxy = rospy.ServiceProxy("/pytoolkit/ALTabletService/hide_srv",battery_service_srv)
 show_picture_proxy()
-local_ip = "157.253.113.209"
+local_ip = "157.253.113.200"
 
 def show_website(web_url):
     request = tablet_service_srvRequest()
     request.url = web_url
     approved = show_web_view_proxy(request)
+
+show_website(f"http://{local_ip}:8000/index.html")
 
 robot_speaking = False
 robot_name = rospy.get_param("~robot_name", "pepper")
@@ -127,11 +128,6 @@ def play_animation(animation_name):
 
 app = FastAPI()
 
-@app.on_event("startup")
-async def lifespan():
-    show_website(f"http://{local_ip}:8000/static/index.html")
-
-
 # Configure CORS
 _allowed_origins = os.getenv("CORS_ORIGINS", "*")
 if _allowed_origins.strip() == "*":
@@ -148,10 +144,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Mount static files directory
-static_path = os.path.join(os.path.dirname(__file__), "static")
-app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 @app.get("/", response_class=RedirectResponse)
 async def main_page():
@@ -185,10 +177,10 @@ async def handle_action(action: str):
             play_animation("disco/full_launcher")
         elif action == "acabo_hablar":
             print("Action received: acabo_hablar")
-            show_website(f"http://{local_ip}:8000/static/menu.html")
+            show_website(f"http://{local_ip}:8000/menu.html")
             talk("Ahora que conoces brevemente de lo que es capaz de hacer. Es momento de que lo pruebes en directo. Acércate a los peces y realiza cualquier consulta jurídica y descubre todo el potencial de Tirant praim Conversa!", "Spanish")
-            rospy.sleep(30)
-            show_website(f"http://{local_ip}:8000/static/index.html")
+            rospy.sleep(60)
+            show_website(f"http://{local_ip}:8000/index.html")
         elif action == "pose":
             talk("Tomemonos una foto, voy a posar", "Spanish", animated=False)
             enable_breathing("All", False)
@@ -204,8 +196,8 @@ async def handle_action(action: str):
             hide_proxy()
             rospy.sleep(2)
             show_picture_proxy()
-            rospy.sleep(5)
-            show_website(f"http://{local_ip}:8000/static/menu.html")
+            rospy.sleep(10)
+            show_website(f"http://{local_ip}:8000/menu.html")
         else:
             return HTMLResponse(f"Unknown action: {action}", status_code=400)
 
@@ -218,4 +210,4 @@ if __name__ == "__main__":
     """
     Main entry point to run the FastAPI server.
     """
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
