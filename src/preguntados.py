@@ -6,21 +6,17 @@ import rospy
 import os
 import ConsoleFormatter
 import random
-from data import preguntas_respuestas
+import json
 class Preguntados(object):
     def __init__(self) -> None:
         self.consoleFormatter=ConsoleFormatter.ConsoleFormatter()
         self.task_name = "PREGUNTADOS"
         self.hearing = True
-        self.new_game = False
-        self.answer = ""
-        self.question_number = 1
 
         states =  ["PREGUNTADOS", "INIT", "WAIT4GUEST", "ASK", "CHECKANSWER", "SHOWANSWER"]
         self.tm = tm(speech=True, pytoolkit=True)
         self.tm.initialize_node(self.task_name)
-        
-        # Se definen las transiciones entre estados
+        self.qas = cargar_preguntas()
         '''
         Los estados son:
         - PREGUNTADOS: Estado inicial del juego.
@@ -31,7 +27,7 @@ class Preguntados(object):
         - SHOWANSWER: Se muestra la respuesta correcta y el puntaje actual.
         - RESTART: Se reinicia el juego para un nuevo invitado.
         '''
-        
+        # Se definen las transiciones entre estados
         transitions = [
             {"trigger": "start", "source": "PREGUNTADOS", "dest": "INIT"},
             {"trigger": "begin", "source": "INIT", "dest": "WAIT4GUEST"},
@@ -70,6 +66,7 @@ class Preguntados(object):
     def on_enter_ask_question(self):
         '''Se hace la pregunta y se espera la respuesta del usuario'''
         # Se elige una tematica y una pregunta aleatoriamente
+        preguntas_respuestas = self.qas
         tematica = random.choice(list(preguntas_respuestas.keys()))
         # Seleccionar una pregunta y sus respuestas
         pregunta, respuestas = random.choice(preguntas_respuestas[tematica])
@@ -129,3 +126,9 @@ class Preguntados(object):
         self.tm.talk(f"El juego ha terminado. Tu puntaje final es: {self.score} de {self.total_rounds}. Gracias por jugar!")
         # Se vuelve al estado WAIT4GUEST para esperar un nuevo jugador 
         self.restart()
+    
+    """Funciones auxiliares"""
+    
+    def cargar_preguntas():
+        # Falta definir si se usa un JSON custom o OpenTDB
+        pass
