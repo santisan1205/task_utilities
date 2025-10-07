@@ -34,7 +34,7 @@ class Preguntados(object):
             {"trigger": "ask_question", "source": "PREGUNTADOS", "dest": "ASK"},
             {"trigger": "check_answer", "source": "ASK", "dest": "CHECKANSWER"},
             {"trigger": "show_answer", "source": "CHECKANSWER", "dest": "SHOWANSWER"},
-            {"trigger": "next_question", "source": "SHOWANSWER", "dest": "PREGUNTADOS"},
+            {"trigger": "restart", "source": "PREGUNTADOS", "dest": "WAIT4GUEST"},
         ]
         self.machine = Machine(model=self, states=states, transitions=transitions, initial='PREGUNTADOS')
         rospy_check = threading.Thread(target=self.check_rospy)
