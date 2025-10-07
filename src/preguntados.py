@@ -25,8 +25,14 @@ class Preguntados(object):
         - ASK: Se hace una pregunta y se espera la respuesta del usuario.
         - CHECKANSWER: Se verifica si la respuesta es correcta.
         - SHOWANSWER: Se muestra la respuesta correcta y el puntaje actual.
-        - RESTART: Se reinicia el juego para un nuevo invitado.
         '''
+        # TODO: Cargar preguntas y respuestas desde un archivo JSON o base de datos
+        # TODO: Implementar interfaz grafica para mostrar preguntas y respuestas
+        # TODO: Implementar funciones varias que permitan el movimiento y expresion del robot
+        # TODO: Deteccion de numeros mediante entrada de voz
+        # TODO: Manejo de errores y excepciones
+        # TODO: Documentacion, depuracion y legibilidad del codigo
+        
         # Se definen las transiciones entre estados
         transitions = [
             {"trigger": "start", "source": "PREGUNTADOS", "dest": "INIT"},
