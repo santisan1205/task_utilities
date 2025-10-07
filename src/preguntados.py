@@ -24,6 +24,12 @@ class Preguntados(object):
         '''
         Los estados son:
         - PREGUNTADOS: Estado inicial del juego.
+        - INIT: Inicializacion del robot y explicacion del juego.
+        - WAIT4GUEST: Espera a que un invitado diga "Empezar juego".
+        - ASK: Se hace una pregunta y se espera la respuesta del usuario.
+        - CHECKANSWER: Se verifica si la respuesta es correcta.
+        - SHOWANSWER: Se muestra la respuesta correcta y el puntaje actual.
+        - RESTART: Se reinicia el juego para un nuevo invitado.
         '''
         
         transitions = [
