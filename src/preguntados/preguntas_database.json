@@ -1,0 +1,948 @@
+[
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿La mascota de qué restaurante es un payaso?",
+        "opciones": [
+            "McDonalds",
+            "Burger King",
+            "Frisby",
+            "Presto"
+        ],
+        "correcta": "McDonalds"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué signo del zodíaco está representado por el Cangrejo?",
+        "opciones": [
+            "Cáncer",
+            "Virgo",
+            "Libra",
+            "Sagitario"
+        ],
+        "correcta": "Cáncer"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "¿Cuántos estadios hay en una milla?",
+        "opciones": [
+            "Cuatro",
+            "Seis",
+            "Ocho",
+            "Dos"
+        ],
+        "correcta": "Ocho"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿En qué país se fundó Hyundai Motor Company?",
+        "opciones": [
+            "China",
+            "Corea del Sur",
+            "Rusia",
+            "Japón"
+        ],
+        "correcta": "Corea del Sur"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué elemento tiene el símbolo químico Kr?",
+        "opciones": [
+            "Cerio",
+            "Sodio",
+            "Cesio",
+            "Kriptón"
+        ],
+        "correcta": "kriptón"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": " ¿Qué elemento químico, el número 11 de la tabla periódica, tiene el símbolo Na?",
+        "opciones": [
+            "Sodio",
+            "Nitrógeno",
+            "Plomo",
+            "Carbono"
+        ],
+        "correcta": "Sodio"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué tipo de cubiertos son más adecuados para comer sopa?",
+        "opciones": [
+            "Tenedor",
+            "Cuchara",
+            "Palillos",
+            "Cuchillo"
+        ],
+        "correcta": "Cuchara"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿La imagen de qué presidente aparece en el raro billete de 2 dólares de la moneda estadounidense?",
+        "opciones": [
+            "Thomas Jefferson",
+            "Ulysses Grant",
+            "Martin Van Buren",
+            "John Quincy Adams"
+        ],
+        "correcta": "Thomas Jefferson"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "En los cómics de DC, ¿dónde vive Green Arrow (Oliver Queen)?",
+        "opciones": [
+            "Gotham City",
+            "Star City",
+            "Central City",
+            "Metropolis"
+        ],
+        "correcta": "Star City"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿En qué juego fue la primera aparición de Waluigi?",
+        "opciones": [
+            "Super Smash Bros. Ultimate",
+            "Mario Party (N64)",
+            "Mario Tennis 64 (N64)",
+            "Wario Land: Super Mario Land 3"
+        ],
+        "correcta": "Mario Tennis 64 (N64)"
+    },
+    {
+        "categoria": "Conocimiento General",
+        "pregunta": "Según el Libro del Génesis en el Antiguo Testamento, ¿cuántos días le tomó a Dios crear el mundo?",
+        "opciones": [
+            "Uno",
+            "Doce",
+            "Seis",
+            "Siete"
+        ],
+        "correcta": "Seis"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Cuál es el planeta más cercano al sol de nuestro sistema solar?",
+        "opciones": [
+            "Marte",
+            "Mercurio",
+            "Júpiter",
+            "Tierra"
+        ],
+        "correcta": "Mercurio"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "En Half-Life, ¿cómo se llama el alienígena que se adhiere a las cabezas?",
+        "opciones": [
+            "Headcrab",
+            "Bullsquid",
+            "Facehugger",
+            "Vortigaunt"
+        ],
+        "correcta": "Headcrab"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué presidente estadounidense aparece en un billete de un dólar?",
+        "opciones": [
+            "George Washington",
+            "Thomas Jefferson",
+            "Benjamin Franklin",
+            "Abraham Lincoln"
+        ],
+        "correcta": "George Washington"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué significa VR?",
+        "opciones": [
+            "Muy real",
+            "Realidad virtual",
+            "Reconocimiento de voz",
+            "Reconocimiento visual"
+        ],
+        "correcta": "Realidad virtual"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cuántos libros de Harry Potter hay?",
+        "opciones": [
+            "5",
+            "7",
+            "8",
+            "6"
+        ],
+        "correcta": "7"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cuál es el título del primer libro de Sherlock Holmes de Arthur Conan Doyle?",
+        "opciones": [
+            "Un caso de identidad",
+            "Las acciones de Raffles Haw",
+            "Un estudio en escarlata",
+            "El signo de los cuatro"
+        ],
+        "correcta": "Un estudio en escarlata"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Qué libro clásico comienza con la frase \"Llámame_Ismael\"",
+        "opciones": [
+            "Secuestrado",
+            "Una historia de dos ciudades",
+            "Moby Dick",
+            "Cumbres borrascosas"
+        ],
+        "correcta": "Moby Dick"
+    },
+    {
+        "categoria": "Entretenimiento: Libros ",
+        "pregunta": " ¿Cuál es el segundo libro de la serie Canción de hielo y fuego de George R. R. Martin?",
+        "opciones": [
+            "Danza de dragones",
+            "Tormenta de espadas",
+            "Festín de cuervos",
+            "Choque de reyes"
+        ],
+        "correcta": "Choque de reyes"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Bajo qué seudónimo Stephen King publicó cinco novelas entre 1977 y 1984?",
+        "opciones": [
+            "Lewis Carroll",
+            "J. D. Robb",
+            "Richard Bachman",
+            "Mark Twain"
+        ],
+        "correcta": "Richard Bachman"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Quién fue el autor original de Frankenstein?",
+        "opciones": [
+            "H. P. Lovecraft",
+            "Bram Stoker",
+            "Edgar Allan Poe",
+            "Mary Shelley"
+        ],
+        "correcta": "Mary Shelley"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cómo se llama el hermano de Sherlock Holmes?",
+        "opciones": [
+            "Herbie Hancock Holmes",
+            "Mederi Holmes",
+            "Mycroft Holmes",
+            "Martin Holmes"
+        ],
+        "correcta": "Mycroft Holmes"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Quién escribió Harry Potter, la serie de libros de fantasía?",
+        "opciones": [
+            "Terry Pratchett",
+            "J.K. Rowling",
+            "J.R.R. Tolkien",
+            "Daniel Radcliffe"
+        ],
+        "correcta": "J.K. Rowling"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "George Orwell escribió este libro, que a menudo se considera una declaración sobre la supervisión gubernamental.",
+        "opciones": [
+            "Mil novecientos ochenta y cuatro",
+            "Matar a un ruiseñor",
+            "El viejo y el mar",
+            "El cazador y el centeno"
+        ],
+        "correcta": "Mil novecientos ochenta y cuatro"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿En qué libro de Harry Potter se encontró por primera vez un Horrocrux?",
+        "opciones": [
+            "El Príncipe Mestizo",
+            "Las Reliquias de la Muerte",
+            "La Cámara de los Secretos",
+            "El Cáliz de Fuego"
+        ],
+        "correcta": "La Cámara de los Secretos"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cómo se llama el perro de tres cabezas en Harry Potter y la piedra filosofal?",
+        "opciones": [
+            "Spike",
+            "Spot",
+            "Poofy",
+            "Fluffy"
+        ],
+        "correcta": "Fluffy"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Cuál de estos actores NO aparece en la película de 1998 Salvar al soldado Ryan?",
+        "opciones": [
+            "Vin Diesel",
+            "Ralph Fiennes",
+            "Matt Damon",
+            "Tom Hanks"
+        ],
+        "correcta": "Ralph Fiennes"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Qué película animada fue la primera en presentar a una celebridad como actor de doblaje?",
+        "opciones": [
+            "El jorobado de Notre Dame",
+            "Aladdin",
+            "James y el melocotón gigante",
+            "Toy Story"
+        ],
+        "correcta": "Aladdin"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Quién interpretó a Bruce Wayne y Batman en la película de 1989 de Tim Burton, Batman?",
+        "opciones": [
+            "Michael Keaton",
+            "Adam West",
+            "Val Kilmer",
+            "George Clooney"
+        ],
+        "correcta": "Michael Keaton"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Qué película estrenada en 2016 presenta a Superman y Batman peleando?",
+        "opciones": [
+            "Batman vs Superman: Apocalipsis",
+            "Batman vs Superman: El origen de la justicia",
+            "Batman vs Superman: El caballero de la noche asciende",
+            "Batman vs Superman: La caida del caballero oscuro"
+        ],
+        "correcta": "Batman vs Superman: El origen de la justicia"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "La película animada de Disney de 2016 Moana ¿En qué cultura se basa?",
+        "opciones": [
+            "Nórdica",
+            "Nativo americano",
+            "Hawaiana",
+            "Japonesa"
+        ],
+        "correcta": "Hawaiana"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Qué superhéroe ha sido interpretado en el cine por los actores Michael Keaton, Val Kilmer, George Clooney y Christian Bale?",
+        "opciones": [
+            "Iron Man",
+            "Batman",
+            "Superman",
+            "Spiderman"
+        ],
+        "correcta": "Batman"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Cómo se llama el robot naranja y blanco en Star Wars: El despertar de la fuerza?",
+        "opciones": [
+            "BB8",
+            "C3PO",
+            "BB3",
+            "R2D2"
+        ],
+        "correcta": "BB8"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Qué período histórico fue el centro de la película Assassin's Creed (2016)?",
+        "opciones": [
+            "América colonial",
+            "Revolución Francesa",
+            "Inglaterra victoriana",
+            "Inquisición española"
+        ],
+        "correcta": "Inquisición española"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Cuál fue la primera película de James Bond?",
+        "opciones": [
+            "Dr. No",
+            "Casino Royale",
+            "Goldfinger",
+            "No time to die"
+        ],
+        "correcta": "Dr. No"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Quién interpretó a Thanos en Avengers: Infinity War y Avengers: End Game?",
+        "opciones": [
+            "Tom Hiddleston",
+            "Josh Brolin",
+            "Adam Sandler",
+            "Sean Gunn"
+        ],
+        "correcta": "Josh Brolin"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "En el programa Dragonball Z, ¿cómo se llama el ataque más poderoso de Cell?",
+        "opciones": [
+            "Android Kamehameha",
+            "Super Kamehameha",
+            "Solar Kamehameha",
+            "Cell Kamehameha"
+        ],
+        "correcta": "Solar Kamehameha"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Cómo se llama el personaje principal de &quot;The Flash&quot;? ¿Serie de televisión?",
+        "opciones": [
+            "Barry Allen",
+            "Oliver Queen",
+            "Bruce Wayne",
+            "Bart Allen"
+        ],
+        "correcta": "Barry Allen"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "En &quot;Breaking Bad&quot;, Walter White es un profesor de secundaria ¿con qué tipo de cáncer se le diagnostica?",
+        "opciones": [
+            "Cáncer de pulmón",
+            "Cáncer de cerebro",
+            "Cáncer de próstata",
+            "Cáncer de testículo"
+        ],
+        "correcta": "Cáncer de pulmón"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Cuál de estos personajes de Bojack Horseman es un humano?",
+        "opciones": [
+            "Princess Carolyn",
+            "Todd Chavez",
+            "Tom Jumbo-Grumbo",
+            "Lennie Turtletaub"
+        ],
+        "correcta": "Todd Chavez"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "El actor británico David Morrissey, ¿qué papel protagoniza en &quot;The Walking Dead&quot;?",
+        "opciones": [
+            "Rick Grimes",
+            "Daryl Dixon",
+            "Negan",
+            "El Gobernador"
+        ],
+        "correcta": "El Gobernador"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "La serie de HBO &quot;Juego de Tronos&quot; ¿En qué serie de libros se basa?",
+        "opciones": [
+            "Canción de hielo y fuego",
+            "Harry Potter",
+            "La rueda del tiempo",
+            "El cuaderno"
+        ],
+        "correcta": "Canción de hielo y fuego"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "En DuckTales, ¿cómo se llama la ciudad donde viven todos los personajes principales?",
+        "opciones": [
+            "Duckburg",
+            "Tailspin",
+            "Wingford",
+            "Duckwing"
+        ],
+        "correcta": "Duckburg"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Qué programa de televisión trata sobre un abuelo que arrastra a su nieto a vivir aventuras?",
+        "opciones": [
+            "Rick and Morty",
+            "Padre americano",
+            "Padre de familia",
+            "South Park"
+        ],
+        "correcta": "Rick and Morty"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿En qué ciudad ficticia se desarrolla la serie de televisión Los Simpsons?",
+        "opciones": [
+            "Springfield",
+            "Shelbyville",
+            "Ogdenville",
+            "North Haverbrook"
+        ],
+        "correcta": "Springfield"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Cuál es el nombre del protagonista en la serie de videojuegos The Legend of Zelda?",
+        "opciones": [
+            "Zelda",
+            "Link",
+            "Ganon",
+            "Navi"
+        ],
+        "correcta": "Link"
+    },
+    {
+        "categoria": "Entretenimiento: videojuegos",
+        "pregunta": "¿Cuál de los siguientes NO es uno de los personajes principales del modo historia de Grand Theft Auto V?",
+        "opciones": [
+            "Franklin Clinton",
+            "Tommy Vercetti",
+            "Trevor Phillips",
+            "Michael de Santa"
+        ],
+        "correcta": "Tommy Vercetti"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "Los juegos Cry of Fear, Natural Selection y Counter-Strike fueron originalmente mods ¿para qué videojuego?",
+        "opciones": [
+            "Arma 2",
+            "Warcraft III",
+            "Half-Life",
+            "Doom"
+        ],
+        "correcta": "Half-Life"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Qué miembro de Elite Four de la primera generación de Pokémon se convirtió en el ceón de la próxima generación?",
+        "opciones": [
+            "Lorelei",
+            "Bruno",
+            "Lance",
+            "Agatha"
+        ],
+        "correcta": "Lance"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Qué equipo de eSports obtuvo el primer lugar en el Ceonato Internacional Dota 2 2016?",
+        "opciones": [
+            "Wings Gaming",
+            "Digital Chaos",
+            "Fnatic",
+            "Evil Geniuses"
+        ],
+        "correcta": "Wings Gaming"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Cuál de estos motores de videojuegos fue creado por la empresa Epic Games?",
+        "opciones": [
+            "Unity",
+            "Unreal",
+            "Cry Engine",
+            "Game Maker: Studio"
+        ],
+        "correcta": "Unreal"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "En la serie Half-Life, el arma distintiva de Gordon Freeman es:",
+        "opciones": [
+            "Cable de fibra",
+            "Palanca",
+            "Katana",
+            "Mazo"
+        ],
+        "correcta": "Palanca"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "El juego gráficamente más violento que precedió a la creación de la ESRB (Entertainment Software Rating Board) fue...",
+        "opciones": [
+            "Doom",
+            "Mortal Kombat",
+            "Duke Nukem",
+            "Resident Evil"
+        ],
+        "correcta": "Mortal Kombat"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Qué Pokémon puede aprender el movimiento Poder secreto? subiendo de nivel?",
+        "opciones": [
+            "Silvally",
+            "Arceus",
+            "Audino",
+            "Pidgey"
+        ],
+        "correcta": "Audino"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "En Fallout 4 ¿Qué facción no está presente en el juego?",
+        "opciones": [
+            "La Hermandad del Acero",
+            "El Instituto",
+            "El Enclave",
+            "Los Minutemen"
+        ],
+        "correcta": "El Enclave"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Qué ingredientes se necesitan para hacer un pastel en Minecraft?",
+        "opciones": [
+            "Leche, caña de azúcar, huevo y trigo",
+            "Leche, pan, huevo y trigo",
+            "Leche, azúcar, huevo y trigo",
+            "Leche, azúcar y trigo"
+        ],
+        "correcta": "Leche, azúcar, huevo y trigo"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Cómo se llama el gato que habla en Persona 5?",
+        "opciones": [
+            "Morgana",
+            "Marie",
+            "Teddie",
+            "Ryuji"
+        ],
+        "correcta": "Morgana"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué animal participa en el experimento mental más famoso de Schrödinger?",
+        "opciones": [
+            "Mariposa",
+            "Murciélago",
+            "Gato",
+            "Perro"
+        ],
+        "correcta": "Gato"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el símbolo elemental del mercurio?",
+        "opciones": [
+            "Me",
+            "Hy",
+            "Mc",
+            "Hg"
+        ],
+        "correcta": "Hg"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "Las estrellas se componen principalmente de hidrógeno y ¿de qué otro gas?",
+        "opciones": [
+            "Helio",
+            "Argón",
+            "Nitrógeno",
+            "Oxígeno"
+        ],
+        "correcta": "Helio"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué significa ADN?",
+        "opciones": [
+            "Átomos desoxirribogenéticos",
+            "Ácido desoxirribogenético",
+            "Ácido desoxirribogenético",
+            "Ácido desoxirribonucleico"
+        ],
+        "correcta": "Ácido desoxirribonucleico"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué significa LASER?",
+        "opciones": [
+            "Análisis ligero mediante ecorazer estéreo",
+            "lificador de luz mediante energía de radio en espera",
+            "Antimateria vital mediante entrada de rango",
+            "lificación de luz mediante emisión estimulada de radiación"
+        ],
+        "correcta": "lificación de luz mediante emisión estimulada de radiación"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el animal más grande actualmente en la Tierra?",
+        "opciones": [
+            "Ballena Azul",
+            "Calamar Colosal",
+            "Jirafa",
+            "Orca"
+        ],
+        "correcta": "Ballena Azul"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el elemento más abundante en el universo?",
+        "opciones": [
+            "Litio",
+            "Hidrógeno",
+            "Oxígeno",
+            "Helio"
+        ],
+        "correcta": "Hidrógeno"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el nombre oficial de la estrella ubicada más cercana al polo norte celeste?",
+        "opciones": [
+            "Gamma Cephei",
+            "Polaris",
+            "Eridanus",
+            "Iota Cephei"
+        ],
+        "correcta": "Polaris"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "Este elemento, cuando se supera con calor y presión extremos, crea diamantes.",
+        "opciones": [
+            "Hidrógeno",
+            "Carbono",
+            "Nitrógeno",
+            "Oxígeno"
+        ],
+        "correcta": "Carbono"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es la capa delgada y más externa de la Tierra?",
+        "opciones": [
+            "Exosfera",
+            "Manto",
+            "Corteza",
+            "Núcleo externo"
+        ],
+        "correcta": "Corteza"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿De quién lleva el nombre el elemento químico curio?",
+        "opciones": [
+            "Jorge el Curioso",
+            "Stephen Curry",
+            "Marie y Pierre Curie",
+            "El rover de la curiosidad"
+        ],
+        "correcta": "Marie y Pierre Curie"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuántos planetas hay en el Sistema Solar?",
+        "opciones": [
+            "9",
+            "8",
+            "10",
+            "11"
+        ],
+        "correcta": "8"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es la composición química del agua?",
+        "opciones": [
+            "C12H6O2",
+            "CO2",
+            "H",
+            "H20"
+        ],
+        "correcta": "H20"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿La enfermedad de Alzheimer afecta principalmente a qué parte del cuerpo humano?",
+        "opciones": [
+            "Pulmones",
+            "Corazón",
+            "Cerebro",
+            "Piel"
+        ],
+        "correcta": "Cerebro"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué hay en el centro de nuestra galaxia?",
+        "opciones": [
+            "Una supernova",
+            "Un cuásar",
+            "Un agujero de gusano",
+            "Un agujero negro"
+        ],
+        "correcta": "Un agujero negro"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuántas lunas tiene la Tierra?",
+        "opciones": [
+            "0",
+            "1",
+            "3",
+            "2"
+        ],
+        "correcta": "1"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el planeta más caliente del sistema solar?",
+        "opciones": [
+            "Júpiter",
+            "Marte",
+            "Mercurio ",
+            "Venus"
+        ],
+        "correcta": "Venus"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál de los siguientes vasos sanguíneos transporta sangre desoxigenada?",
+        "opciones": [
+            "Arteria pulmonar",
+            "Vena pulmonar",
+            "Aorta",
+            "Arteria coronaria"
+        ],
+        "correcta": "Arteria pulmonar"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "En informática, ¿qué significa LAN?",
+        "opciones": [
+            "Red de área local",
+            "Nodo de antena larga",
+            "Navegación por dirección terrestre",
+            "Nodo de acceso ligero"
+        ],
+        "correcta": "Red de área local"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Con qué lenguaje informático asociarías el framework Django?",
+        "opciones": [
+            "C#",
+            "Python",
+            "C++",
+            "Java"
+        ],
+        "correcta": "Python"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué lenguaje de programación comparte su nombre con una isla en Indonesia?",
+        "opciones": [
+            "Python",
+            "Java",
+            "Yakarta",
+            "C"
+        ],
+        "correcta": "Java"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Cuál es el nombre clave del sistema operativo móvil Android 7.0?",
+        "opciones": [
+            "Jelly Bean",
+            "Ice Cream Sandwich",
+            "Nougat",
+            "Marshmallow"
+        ],
+        "correcta": "Nougat"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué dispositivo de hardware de computadora proporciona una interfaz para que se comuniquen todos los demás dispositivos conectados?",
+        "opciones": [
+            "Placa base",
+            "Unidad de disco duro",
+            "Memoria de acceso aleatorio",
+            "Unidad central de procesamiento"
+        ],
+        "correcta": "Placa base"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué significa CPU?",
+        "opciones": [
+            "Unidad central de procesamiento",
+            "Unidad central de procesamiento",
+            "Unidad personal de computadora",
+            "Unidad central de proceso"
+        ],
+        "correcta": "Unidad central de procesamiento"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "Cuando Gmail se lanzó por primera vez, ¿cuánto almacenamiento proporcionaba para su correo electrónico?",
+        "opciones": [
+            "1GB",
+            "512MB",
+            "5GB",
+            "Ilimitado"
+        ],
+        "correcta": "1GB"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué tipo de lenguaje es HTML?",
+        "opciones": [
+            "Lenguaje de programación",
+            "Lenguaje de macros",
+            "Lenguaje de scripting",
+            "Lenguaje de marcado"
+        ],
+        "correcta": "Lenguaje de marcado"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "En cualquier lenguaje de programación, ¿cuál es la forma más común de iterar a través de una matriz?",
+        "opciones": [
+            "Bucles while",
+            "Bucles for",
+            "Bucles foreach",
+            "Bucles do-while"
+        ],
+        "correcta": "Bucles for"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué significa el acrónimo de software informático JVM?",
+        "opciones": [
+            "Just Virtual Machine",
+            "Java Vendor Machine",
+            "Java Visual Machine",
+            "Java Virtual Machine"
+        ],
+        "correcta": "Java Virtual Machine"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué significa GHz?",
+        "opciones": [
+            "Gigahetz",
+            "Gigahatz",
+            "Gigahotz",
+            "Gigahertz"
+        ],
+        "correcta": "Gigahertz"
+    }
+]
