@@ -14,7 +14,6 @@ class Preguntados(object):
         self.consoleFormatter=ConsoleFormatter.ConsoleFormatter()
         self.task_name = "PREGUNTADOS"
         self.hearing = True
-
         states =  ["PREGUNTADOS", "INIT", "WAIT4GUEST", "QASPROCESSING"]
         self.tm = tm(speech=True, pytoolkit=True)
         self.tm.initialize_node(self.task_name)
@@ -28,13 +27,11 @@ class Preguntados(object):
         - CHECKANSWER: Se verifica si la respuesta es correcta.
         - SHOWANSWER: Se muestra la respuesta correcta y el puntaje actual.
         '''
-        # TODO: Cargar preguntas y respuestas desde un archivo JSON o base de datos
         # TODO: Implementar interfaz grafica para mostrar preguntas y respuestas
         # TODO: Implementar funciones varias que permitan el movimiento y expresion del robot
         # TODO: Deteccion de numeros mediante entrada de voz
         # TODO: Manejo de errores y excepciones
         # TODO: Documentacion, depuracion y legibilidad del codigo
-        
         # Se definen las transiciones entre estados
         transitions = [
             {"trigger": "start", "source": "TRIVIA", "dest": "INIT"},

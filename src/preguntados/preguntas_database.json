@@ -188,7 +188,7 @@
     },
     {
         "categoria": "Entretenimiento: Libros",
-        "pregunta": "¿Qué libro clásico comienza con la frase \"Llámame_Ismael\"",
+        "pregunta": "¿Qué libro clásico comienza con la frase Llámame_Ismael",
         "opciones": [
             "Secuestrado",
             "Una historia de dos ciudades",
@@ -408,7 +408,7 @@
     },
     {
         "categoria": "Entretenimiento: Televisión",
-        "pregunta": "¿Cómo se llama el personaje principal de &quot;The Flash&quot;? ¿Serie de televisión?",
+        "pregunta": "¿Cómo se llama el personaje principal de The Flash? ¿Serie de televisión?",
         "opciones": [
             "Barry Allen",
             "Oliver Queen",
@@ -419,7 +419,7 @@
     },
     {
         "categoria": "Entretenimiento: Televisión",
-        "pregunta": "En &quot;Breaking Bad&quot;, Walter White es un profesor de secundaria ¿con qué tipo de cáncer se le diagnostica?",
+        "pregunta": "En Breaking Bad, Walter White es un profesor de secundaria ¿con qué tipo de cáncer se le diagnostica?",
         "opciones": [
             "Cáncer de pulmón",
             "Cáncer de cerebro",
@@ -441,7 +441,7 @@
     },
     {
         "categoria": "Entretenimiento: Televisión",
-        "pregunta": "El actor británico David Morrissey, ¿qué papel protagoniza en &quot;The Walking Dead&quot;?",
+        "pregunta": "El actor británico David Morrissey, ¿qué papel protagoniza en The Walking Dead?",
         "opciones": [
             "Rick Grimes",
             "Daryl Dixon",
@@ -452,7 +452,7 @@
     },
     {
         "categoria": "Entretenimiento: Televisión",
-        "pregunta": "La serie de HBO &quot;Juego de Tronos&quot; ¿En qué serie de libros se basa?",
+        "pregunta": "La serie de HBO Juego de Tronos ¿En qué serie de libros se basa?",
         "opciones": [
             "Canción de hielo y fuego",
             "Harry Potter",
@@ -537,17 +537,6 @@
             "Agatha"
         ],
         "correcta": "Lance"
-    },
-    {
-        "categoria": "Entretenimiento: Videojuegos",
-        "pregunta": "¿Qué equipo de eSports obtuvo el primer lugar en el Ceonato Internacional Dota 2 2016?",
-        "opciones": [
-            "Wings Gaming",
-            "Digital Chaos",
-            "Fnatic",
-            "Evil Geniuses"
-        ],
-        "correcta": "Wings Gaming"
     },
     {
         "categoria": "Entretenimiento: Videojuegos",
@@ -944,5 +933,1314 @@
             "Gigahertz"
         ],
         "correcta": "Gigahertz"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "¿Qué signo del zodíaco se sitúa entre Virgo y Escorpio?",
+        "opciones": [
+            "Géminis",
+            "Capricornio",
+            "Libra",
+            "Tauro"
+        ],
+        "correcta": "Libra"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Cómo llaman los marineros al lado derecho de un barco?",
+        "opciones": [
+            "Babor",
+            "Estribor",
+            "Popa",
+            "Proa"
+        ],
+        "correcta": "Estribor"
+    },
+    
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Cuál de los siguientes componentes sanguíneos forma un tapón en el lugar de las lesiones?",
+        "opciones": [
+            "Glóbulos blancos",
+            "Plaquetas",
+            "Glóbulos rojos",
+            "Plasma sanguíneo"
+        ],
+        "correcta": "Plaquetas"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Qué órgano del cuerpo produce bilis?",
+        "opciones": [
+            "Hígado",
+            "Páncreas",
+            "Vesícula biliar",
+            "Estómago"
+        ],
+        "correcta": "Hígado"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿En qué galaxia se encuentra la Tierra?",
+        "opciones": [
+            "La Vía Láctea",
+            "La galaxia Note",
+            "El agujero negro",
+            "La galaxia de Marte"
+        ],
+        "correcta": "La Vía Láctea"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cómo se llama el padre de Harry Potter?",
+        "opciones": [
+            "Frank Potter",
+            "Hairy Potter Sr.",
+            "James Potter",
+            "Joey Potter"
+        ],
+        "correcta": "James Potter"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cuál es el título del primer libro de Sherlock Holmes de Arthur Conan Doyle?",
+        "opciones": [
+            "Un estudio en escarlata",
+            "El signo de los cuatro",
+            "Un caso de identidad",
+            "Las acciones de Raffles Haw"
+        ],
+        "correcta": "Un estudio en escarlata"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Qué actor interpreta a Obi-Wan Kenobi en Star Wars Episodios I-III?",
+        "opciones": [
+            "Hayden Christensen",
+            "Liam Neeson",
+            "Alec Guinness",
+            "Evan McGregor"
+        ],
+        "correcta": "Evan McGregor"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Quién dirigió las películas de Kill Bill?",
+        "opciones": [
+            "David Lean",
+            "Arnold Schwarzenegger",
+            "Quentin Tarantino",
+            "Stanley Kubrick"
+        ],
+        "correcta": "Quentin Tarantino"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "Esta película contiene la cita: ¡Siento la necesidad... la necesidad de velocidad!",
+        "opciones": [
+            "Días de trueno",
+            "Cóctel",
+            "El color del dinero",
+            "Top Gun"
+        ],
+        "correcta": "Top Gun"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Qué nombre le puso Tom Hanks a su compañero de voleibol en la película Naufrago?",
+        "opciones": [
+            "Wilson",
+            "Billy",
+            "Friday",
+            "Jones"
+        ],
+        "correcta": "Wilson"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Cuál de estos personajes de Stranger Things ¿Tiene el poder de Telequinesis?",
+        "opciones": [
+            "Lucas",
+            "Mike",
+            "Once",
+            "Karen"
+        ],
+        "correcta": "Once"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "En el programa de televisión Breaking Bad, ¿cuál es el nombre de la calle del famoso producto de Walter y Jesse?",
+        "opciones": [
+            "Rock Candy",
+            "Pure Glass",
+            "Baby Blue",
+            "Blue Sky"
+        ],
+        "correcta": "Blue Sky"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Grant Gustin interpreta a qué superhéroe en el programa de CW del mismo nombre?",
+        "opciones": [
+            "Daredevil",
+            "The Flash",
+            "Black Canary",
+            "The Arrow"
+        ],
+        "correcta": "The Flash"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "En Mario y Sonic en los Juegos Olímpicos, ¿en cuántos tipos se dividen los personajes?",
+        "opciones": [
+            "4",
+            "6",
+            "3",
+            "5"
+        ],
+        "correcta": "4"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el planeta más grande del Sistema Solar?",
+        "opciones": [
+            "Saturno",
+            "Tierra",
+            "Marte",
+            "Júpiter"
+        ],
+        "correcta": "Júpiter"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Aproximadamente qué porcentaje de la superficie de la Tierra es agua? ",
+        "opciones": [
+            "70%",
+            "30%",
+            "90%",
+            "50%"
+        ],
+        "correcta": "70%"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cómo se llamaba el primer satélite artificial de la Tierra, lanzado por la Unión Soviética en 1957?",
+        "opciones": [
+            "Sputnik 1",
+            "Zenit-2",
+            "Soyuz 7K-OK",
+            "Voskhod 3KV"
+        ],
+        "correcta": "Sputnik 1"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es el animal más grande actualmente en la Tierra?",
+        "opciones": [
+            "Orca",
+            "Ballena Azul",
+            "Calamar Colosal",
+            "Jirafa"
+        ],
+        "correcta": "Ballena Azul"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es la principal sustancia adictiva que se encuentra en el tabaco?",
+        "opciones": [
+            "Efedrina",
+            "Glaucina",
+            "Nicotina",
+            "Catinona"
+        ],
+        "correcta": "Nicotina"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuál es la unidad de resistencia eléctrica?",
+        "opciones": [
+            "Mho",
+            "Joule",
+            "Ohm",
+            "Tesla"
+        ],
+        "correcta": "Ohm"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿En que planeta se encuentra la gema del alma en el universo Marvel?",
+        "opciones": [
+            "Namekusei",
+            "La tierra",
+            "Vormir",
+            "Morag"
+        ],
+        "correcta": "Vormir"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "¿En qué dirección mira la Estatua de la Libertad?",
+        "opciones": [
+            "Sureste",
+            "Suroeste",
+            "Noroeste",
+            "Noreste"
+        ],
+        "correcta": "Sureste"
+    },
+    {
+        "categoria": "Conocimientos generales",
+        "pregunta": "¿Cómo se llama el primer vídeo subido a YouTube?",
+        "opciones": [
+            "carrie monta un camión",
+            "Su nuevo cachorro del bisabuelo vern.",
+            "tributo",
+            "Yo en el zoológico"
+        ],
+        "correcta": "Yo en el zoológico"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "Este campo a veces se conoce como La ciencia triste.",
+        "opciones": [
+            "Política",
+            "Física",
+            "Economía",
+            "Filosofía"
+        ],
+        "correcta": "Economía"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Para qué vende Bart su alma en el episodio de Los Simpson Bart vende su alma?",
+        "opciones": [
+            "Una copia de Bonestorm 2",
+            "Una paleta gigante",
+            "Oro",
+            "Un billete de cinco dolares"
+        ],
+        "correcta": "Un billete de cinco dolares"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Cuál de las siguientes películas no se basó en un libro?",
+        "opciones": [
+            "El Padrino",
+            "Ciudadano Kane",
+            "Forrest Gump",
+            "Jurassic Park"
+        ],
+        "correcta": "Ciudadano Kane"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "En la película de 1984 The Terminator, ¿qué número de modelo es el Terminator interpretado por Arnold Schwarzenegger?",
+        "opciones": [
+            "I-950",
+            "T-1000",
+            "T-800",
+            "T-888"
+        ],
+        "correcta": "T-800"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Quién dirigió la película Alien?",
+        "opciones": [
+            "James Cameron",
+            "Christopher Nolan",
+            "Michael Bay",
+            "Ridley Scott"
+        ],
+        "correcta": "Ridley Scott"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "En Regreso al futuro II, Marty y el Dr. Emmett Brown, ¿a qué fecha futura van?",
+        "opciones": [
+            "2015",
+            "2013",
+            "2016",
+            "2011"
+        ],
+        "correcta": "2015"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "El título de la autobiografía de Adolf Hitler Mein Kampf ¿Qué es cuando se traduce al español?",
+        "opciones": [
+            "Mi tristeza",
+            "Mi lucha",
+            "Mi deseo",
+            "Mi odio"
+        ],
+        "correcta": "Mi lucha"
+    },
+    {
+        "categoria": "Ciencias: Matemáticas",
+        "pregunta": "Al número entero más cercano, ¿cuántos radianes hay en un círculo entero?",
+        "opciones": [
+            "3",
+            "6",
+            "5",
+            "4"
+        ],
+        "correcta": "6"
+    },
+    {
+        "categoria": "Ciencias: Matemáticas",
+        "pregunta": "¿Cuál es la representación alfanumérica del número imaginario?",
+        "opciones": [
+            "x",
+            "e",
+            "n",
+            "i"
+        ],
+        "correcta": "i"
+    },
+    {
+        "categoria": "Ciencias: Matemáticas",
+        "pregunta": "¿Cuál es la derivada de sin(x)",
+        "opciones": [
+            "-sin(x)",
+            "csc(x)",
+            "cos(x)",
+            "-cos(x)"
+        ],
+        "correcta": "cos(x)"
+    },
+    {
+        "categoria": "Ciencias: Matemáticas",
+        "pregunta": "¿Cuál es el número romano de 500?",
+        "opciones": [
+            "X",
+            "C",
+            "L",
+            "D"
+        ],
+        "correcta": "D"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuáles son los vasos sanguíneos más pequeños del cuerpo humano?",
+        "opciones": [
+            "Capilares",
+            "Venulas",
+            "Arteriolas",
+            "Linfáticos"
+        ],
+        "correcta": "Capilares"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué es la hipernatremia?",
+        "opciones": [
+            "Aumento de la glucosa en sangre",
+            "Disminución del potasio en sangre",
+            "Aumento del sodio en sangre",
+            "Disminución del hierro en sangre"
+        ],
+        "correcta": "Aumento del sodio en sangre"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿El deuterio es un isótopo de qué elemento?",
+        "opciones": [
+            "Nitrógeno",
+            "Hidrógeno",
+            "Neón",
+            "Helio"
+        ],
+        "correcta": "Hidrógeno"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "La Tibia ¿En qué parte del cuerpo se encuentra?",
+        "opciones": [
+            "Mano",
+            "Cabeza",
+            "Pierna",
+            "Brazo"
+        ],
+        "correcta": "Pierna"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué estudias si estudias entomología?",
+        "opciones": [
+            "el cerebro",
+            "Los insectos",
+            "Los peces",
+            "Los humanos"
+        ],
+        "correcta": "Los insectos"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Cuántos grados Fahrenheit son 100 grados Celsius? ",
+        "opciones": [
+            "100",
+            "326",
+            "212",
+            "451"
+        ],
+        "correcta": "212"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Cómo se llama la moneda en el juego Animal Crossing? serie?",
+        "opciones": [
+            "Insectos",
+            "Hojas",
+            "Conchas de mar",
+            "Campanas"
+        ],
+        "correcta": "Campanas"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "En el programa de Netflix, Stranger Things, ¿qué canción se cantaría Will mientras estaba desaparecido?",
+        "opciones": [
+            "¿Debería quedarme o debería irme?",
+            "África",
+            "El amor nos desgarrará",
+            "Este hombre encantador"
+        ],
+        "correcta": "¿Debería quedarme o debería irme?"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "Hel era hija de qué figura mitológica nórdica?",
+        "opciones": [
+            "Odin",
+            "Loki",
+            "Thor",
+            "Balder"
+        ],
+        "correcta": "Loki"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "Esta figura mitológica griega es el dios/diosa de la estrategia de batalla (entre otras cosas).",
+        "opciones": [
+            "Artemisa",
+            "Atenea",
+            "Apolo",
+            "Ares"
+        ],
+        "correcta": "Atenea"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Quién es el hijo del dios Loki? ",
+        "opciones": [
+            "Hel",
+            "Odín",
+            "Sigyn",
+            "Fenrir "
+        ],
+        "correcta": "Fenrir "
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Cómo se llama el dios griego de los herreros?",
+        "opciones": [
+            "Artagatus",
+            "Vulcano",
+            "Dyntos",
+            "Hefesto"
+        ],
+        "correcta": "Hefesto"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Un minotauro es mitad humano mitad qué?",
+        "opciones": [
+            "Águila",
+            "Toro",
+            "Caballo",
+            "Vaca"
+        ],
+        "correcta": "Toro"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "En la mitología griega, ¿quién mató a Aquiles?",
+        "opciones": [
+            "Héctor",
+            "Helena",
+            "París",
+            "Pericles"
+        ],
+        "correcta": "París"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Cómo se llama el dios griego de las muertes pacíficas?",
+        "opciones": [
+            "Moros",
+            "Thanatos",
+            "Hades",
+            "Tartarus"
+        ],
+        "correcta": "Thanatos"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "En la mitología nórdica, Baldr fue asesinado por Loki con una lanza mágica hecha de ¿qué planta?",
+        "opciones": [
+            "Muérdago",
+            "Espino amarillo",
+            "La perdición del lobo",
+            "Cicuta"
+        ],
+        "correcta": "Muérdago"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "¿De qué isla portuguesa es el futbolista Cristiano Ronaldo?",
+        "opciones": [
+            "Terceira",
+            "Santa María",
+            "Porto Santo",
+            "Madeira"
+        ],
+        "correcta": "Madeira"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "¿Cuál de estos clubes de fútbol ingleses tiene su sede en Liverpool?",
+        "opciones": [
+            "Arsenal",
+            "Crystal Palace",
+            "West Ham United",
+            "Everton"
+        ],
+        "correcta": "Everton"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "¿Quién ganó la Liga de Campeones en 1999?",
+        "opciones": [
+            "Manchester United",
+            "Liverpool",
+            "Barcelona",
+            "Bayern Munich"
+        ],
+        "correcta": "Manchester United"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el río más largo de Europa?",
+        "opciones": [
+            "Danubio",
+            "Volga",
+            "Támesis",
+            "Rin"
+        ],
+        "correcta": "Volga"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "Todos los siguientes países tienen reclamos oficiales de territorio en la Antártida EXCEPTO:",
+        "opciones": [
+            "Australia",
+            "Noruega",
+            "Estados Unidos",
+            "Chile"
+        ],
+        "correcta": "Estados Unidos"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es la capital de Senegal?",
+        "opciones": [
+            "Nouakchott",
+            "Dakar",
+            "Conakry",
+            "Monrovia"
+        ],
+        "correcta": "Dakar"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "Gibraltar, situada justo al sur de la península Ibérica, ¿de qué país de Europa occidental es un territorio?",
+        "opciones": [
+            "Portugal",
+            "España",
+            "Reino Unido",
+            "Francia"
+        ],
+        "correcta": "Reino Unido"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál de estos países limita con Polonia?",
+        "opciones": [
+            "Francia",
+            "Países Bajos",
+            "Lituania",
+            "Noruega"
+        ],
+        "correcta": "Lituania"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál de los siguientes no es un país megadiverso, uno que alberga un gran número de especies endémicas de la Tierra?",
+        "opciones": [
+            "Sudáfrica",
+            "Perú",
+            "México",
+            "Tailandia"
+        ],
+        "correcta": "Tailandia"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué ciudad alemana se encuentra en el río Isar?",
+        "opciones": [
+            "Múnich",
+            "Hamburgo",
+            "Berlín",
+            "Dortmund"
+        ],
+        "correcta": "Múnich"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuántos países hay dentro del Reino Unido?",
+        "opciones": [
+            "Dos",
+            "Uno",
+            "Tres",
+            "Cuatro"
+        ],
+        "correcta": "Cuatro"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el país musulmán más grande del mundo?",
+        "opciones": [
+            "Irán",
+            "Indonesia",
+            "Arabia Saudita",
+            "Pakistán"
+        ],
+        "correcta": "Indonesia"
+    },
+    {
+        "categoria": "Geografía ",
+        "pregunta": " ¿Cuál es la ciudad capital de Eslovenia? ",
+        "opciones": [
+            " Liubliana ",
+            " dombovlje",
+            " dominio "
+        ],
+        "correcta": " Liubliana "
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué emperador romano llevó al Imperio Romano a alcanzar su máxima extensión territorial?",
+        "opciones": [
+            "Julio César",
+            "Claudio",
+            "Trajano",
+            "Constantino el Grande"
+        ],
+        "correcta": "Trajano"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Cuál de los siguientes países fue el primero en enviar un objeto al espacio?",
+        "opciones": [
+            "Rusia",
+            "China",
+            "Alemania",
+            "Estados Unidos"
+        ],
+        "correcta": "Alemania"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué país fue una potencia aliada en la Segunda Guerra Mundial?",
+        "opciones": [
+            "Italia",
+            "Unión Soviética",
+            "Alemania",
+            "Japón"
+        ],
+        "correcta": "Unión Soviética"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Quién fue el primer presidente de la República Popular China?",
+        "opciones": [
+            "Mao Zedong",
+            "Li Xiannian",
+            "Dong Biwu",
+            "Liu Shaoqi"
+        ],
+        "correcta": "Mao Zedong"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué civilización americana es la fuente de la creencia de que el mundo terminaría o cambiaría drásticamente el 21 de diciembre de 2012?",
+        "opciones": [
+            "Los mayas",
+            "Los navajos",
+            "Los aztecas",
+            "Los incas"
+        ],
+        "correcta": "Los mayas"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Cómo se llamaba el primer asentamiento inglés permanente en América?",
+        "opciones": [
+            "Plymouth",
+            "St. John's",
+            "Jamestown",
+            "Nueva York"
+        ],
+        "correcta": "Jamestown"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Bajo la administración de qué presidente de Estados Unidos se terminó el Canal de Panamá?",
+        "opciones": [
+            "Theodore Roosevelt",
+            "Franklin Delano Roosevelt",
+            "Herbert Hoover",
+            "Woodrow Wilson"
+        ],
+        "correcta": "Woodrow Wilson"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué conflicto histórico mató a más personas?",
+        "opciones": [
+            "Guerra de los Tres Reinos",
+            "Conquistas mongolas",
+            "Rebelión de Taiping",
+            "Segunda Guerra Mundial"
+        ],
+        "correcta": "Segunda Guerra Mundial"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "¿Cómo se llamaba a los dictadores militares japoneses que gobernaron el país durante los siglos XII y XIX?",
+        "opciones": [
+            "Ninja",
+            "Shinobi",
+            "Shogun",
+            "Samurai"
+        ],
+        "correcta": "Shogun"
+    },
+    {
+        "categoria": "Conocimiento general",
+        "pregunta": "¿Qué bebida alcohólica se elabora principalmente con bayas de enebro?",
+        "opciones": [
+            "Tequila",
+            "Gin",
+            "Vodka",
+            "Ron"
+        ],
+        "correcta": "Gin"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Dónde tiene lugar de IT de Stephen King?",
+        "opciones": [
+            "Derry, Maine",
+            "Rockford, Illinois",
+            "Kingsland, Texas",
+            "Innsmouth, Massachusetts"
+        ],
+        "correcta": "Derry, Maine"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cuál de las siguientes no es una obra escrita por Fyodor Dostoievski?",
+        "opciones": [
+            "Los hermanos Karamazov",
+            "Crimen y castigo",
+            "Notas desde el subsuelo",
+            "Anna Karenina"
+        ],
+        "correcta": "Anna Karenina"
+    },
+    {
+        "categoria": "Entretenimiento: Libros",
+        "pregunta": "¿Cuál de los siguientes autores no nació en Inglaterra? ",
+        "opciones": [
+            "Arthur C Clarke",
+            "H G Wells",
+            "Arthur Conan Doyle",
+            "Graham Greene"
+        ],
+        "correcta": "Arthur Conan Doyle"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "¿Qué artista musical tuvo un papel destacado en la película de 2017 Kingsman: The Golden Circle?",
+        "opciones": [
+            "Elton John",
+            "Justin Bieber",
+            "Lady Gaga",
+            "Rihanna"
+        ],
+        "correcta": "Elton John"
+    },
+    {
+        "categoria": "Entretenimiento: Película",
+        "pregunta": "¿Cuál de las siguientes películas NO fue dirigida por Quentin Tarantino?",
+        "opciones": [
+            "Desde el anochecer hasta el amanecer",
+            "Reservoir Dogs",
+            "Pulp Fiction",
+            "Jackie Brown"
+        ],
+        "correcta": "Desde el anochecer hasta el amanecer"
+    },
+    {
+        "categoria": "Entretenimiento: Cine",
+        "pregunta": "En Star Wars, ¿cómo se llama el nuevo Gobierno creado tras la derrota del Imperio Galáctico?",
+        "opciones": [
+            "La Nueva República",
+            "La Alianza Rebelde",
+            "El Amanecer Carmesí",
+            "La Primera Orden"
+        ],
+        "correcta": "La Nueva República"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Cómo se llaman los principales antagonistas de Battlestar Galactica?",
+        "opciones": [
+            "El Colectivo",
+            "Los Cylons",
+            "Los Rebeldes",
+            "La Federación"
+        ],
+        "correcta": "Los Cylons"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿Cuál es el apellido del personaje Daryl en el programa de AMC The Walking Dead?",
+        "opciones": [
+            "Dixon",
+            "Dicketson",
+            "Dickinson",
+            "Grimes"
+        ],
+        "correcta": "Dixon"
+    },
+    {
+        "categoria": "Entretenimiento: Televisión",
+        "pregunta": "¿De qué programa es el personaje James Doakes? ",
+        "opciones": [
+            "The Walking Dead",
+            "Dexter",
+            "Marvel's Daredevil",
+            "Boardwalk Empire"
+        ],
+        "correcta": "Dexter"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "En Resident Evil 2, ¿cuál es el segundo nombre de Leon Kennedy?",
+        "opciones": [
+            "Shaun",
+            "Simon",
+            "Scott",
+            "Sam"
+        ],
+        "correcta": "Scott"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "En Portal 2, ¿qué cuerpo del sistema solar terminó orbitando Wheatley?",
+        "opciones": [
+            "La Tierra",
+            "La luna",
+            "Marte",
+            "Júpiter"
+        ],
+        "correcta": "La luna"
+    },
+    {
+        "categoria": "Entretenimiento: videojuegos",
+        "pregunta": "¿Cuál fue el primer juego de Super Mario lanzado en Norteamérica para 3DS?",
+        "opciones": [
+            "New Super Mario Bros. 2",
+            "Mario Kart 7",
+            "Super Mario 3D Land",
+            "Super Mario Maker"
+        ],
+        "correcta": "Super Mario 3D Land"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Qué pasó con Half-Life 2 antes de su lanzamiento, lo que provocó que Valve comenzara de nuevo el desarrollo del juego?",
+        "opciones": [
+            "No estaban satisfechos con el resultado",
+            "La historia no era lo suficientemente buena",
+            "Demasiados errores para corregir",
+            "El código fuente se filtró"
+        ],
+        "correcta": "El código fuente se filtró"
+    },
+    {
+        "categoria": "Entretenimiento: videojuegos",
+        "pregunta": "En Overwatch ¿Cuál es el nombre completo del héroe McCree?",
+        "opciones": [
+            "Jack &quot;McCree&quot; Morrison",
+            "Jamison &quot;Deadeye&quot; fawkes",
+            "Jesse McCree",
+            "Gabriel Reyes"
+        ],
+        "correcta": "Jesse McCree"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿Cuál de estos no es el nombre de una ciudad de la serie Grand Theft Auto?",
+        "opciones": [
+            "Las Venturas",
+            "San Fierro",
+            "San Andreas",
+            "Vice City"
+        ],
+        "correcta": "San Andreas"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "¿De dónde deriva su nombre el personaje del videojuego de Nintendo, Mario?",
+        "opciones": [
+            "El suegro de Shigeru Miyamoto",
+            "El fontanero de Satoru Iwata",
+            "El propietario de la sede estadounidense",
+            "La fecha (10 de marzo) en que se lanzó Donkey Kong."
+        ],
+        "correcta": "El propietario de la sede estadounidense"
+    },
+    {
+        "categoria": "Entretenimiento: Videojuegos",
+        "pregunta": "De los siguientes juegos de disparos espaciales, ¿cuál salió primero?",
+        "opciones": [
+            "Space Invaders",
+            "Galaxian",
+            "Sinastar",
+            "Galaga"
+        ],
+        "correcta": "Space Invaders"
+    },
+    {
+        "categoria": "Ciencia y amp; Naturaleza",
+        "pregunta": "¿Qué elemento tiene el número atómico 7?",
+        "opciones": [
+            "Hidrógeno",
+            "Nitrógeno",
+            "Neón",
+            "Oxígeno"
+        ],
+        "correcta": "Nitrógeno"
+    },
+    {
+        "categoria": "Ciencia y amp; Naturaleza",
+        "pregunta": "¿Qué parte del cerebro toma su nombre del griego caballito de mar?",
+        "opciones": [
+            "Cerebelo",
+            "Tálamo",
+            "Hipocampo",
+            "Amígdala"
+        ],
+        "correcta": "Hipocampo"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué parte del cuerpo produce insulina?",
+        "opciones": [
+            "Páncreas",
+            "Estómago",
+            "Riñón",
+            "Hígado"
+        ],
+        "correcta": "Páncreas"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué color no se puede producir en las rosas, ni siquiera mediante alteración genética?",
+        "opciones": [
+            "Negro",
+            "Azul",
+            "Marrón",
+            "Naranja"
+        ],
+        "correcta": "Azul"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "¿Qué parte de qué articulación del cuerpo humano forma el menisco medial?",
+        "opciones": [
+            "Codo",
+            "Rodilla",
+            "Hombro",
+            "Tobillo"
+        ],
+        "correcta": "Rodilla"
+    },
+    {
+        "categoria": "Ciencia y Naturaleza",
+        "pregunta": "Un positrón es una antipartícula de ¿qué?",
+        "opciones": [
+            "Fotón",
+            "Electrón",
+            "Neutrón",
+            "Protón"
+        ],
+        "correcta": "Electrón"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "¿Qué significa LCD en computacion?",
+        "opciones": [
+            "Pantalla de cristal líquido",
+            "Última diferencia común",
+            "Diseño largo y continuo",
+            "Diseño de control de lenguaje"
+        ],
+        "correcta": "Pantalla de cristal líquido"
+    },
+    {
+        "categoria": "Ciencia: Computadoras",
+        "pregunta": "En general, ¿qué componente de una computadora consume más energía?",
+        "opciones": [
+            "Fuente de alimentación",
+            "Tarjeta de video",
+            "Procesador",
+            "Disco duro"
+        ],
+        "correcta": "Tarjeta de video"
+    },
+    {
+        "categoria": "Ciencia: Matemáticas",
+        "pregunta": "¿Qué matemático griego corría desnudo por las calles de Siracusa mientras gritaba Eureka después de descubrir el principio de desplazamiento?",
+        "opciones": [
+            "Homero",
+            "Eratóstenes",
+            "Euclides",
+            "Arquímedes"
+        ],
+        "correcta": "Arquímedes"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "En la mitología griega, Perséfone debe regresar al inframundo porque había comido ¿qué tipo de semillas?",
+        "opciones": [
+            "Higo",
+            "Naranja",
+            "Granada",
+            "Girasol"
+        ],
+        "correcta": "Granada"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Quién era el dios romano del fuego?",
+        "opciones": [
+            "Mercurio",
+            "Júpiter",
+            "Apolo",
+            "Vulcano"
+        ],
+        "correcta": "Vulcano"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "Según el mito egipcio de Osiris, ¿quién asesinó a Osiris?",
+        "opciones": [
+            "Ra",
+            "Anhur",
+            "Set",
+            "Horus"
+        ],
+        "correcta": "Set"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "El nombre griego de Neptuno era...",
+        "opciones": [
+            "Poseidón",
+            "Apolo",
+            "Zeus",
+            "Ares"
+        ],
+        "correcta": "Poseidón"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "En la mitología nórdica, ¿cuál es el nombre del símbolo comúnmente conocido como el Árbol de la vida?",
+        "opciones": [
+            "Árbol de la Tierra",
+            "Ymir",
+            "Las raíces de Odín",
+            "Yggdrasil"
+        ],
+        "correcta": "Yggdrasil"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "En un juego de billar, ¿de qué color la bola vale 3 puntos?",
+        "opciones": [
+            "Verde",
+            "Marrón",
+            "Azul",
+            "Amarillo"
+        ],
+        "correcta": "Verde"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "¿Qué nación fue sede de la Copa Mundial de la FIFA en 2006?",
+        "opciones": [
+            "Alemania",
+            "Brasil",
+            "Sudáfrica",
+            "Reino Unido"
+        ],
+        "correcta": "Alemania"
+    },
+    {
+        "categoria": "Deportes",
+        "pregunta": "En la Fórmula 1, el coche de seguridad virtual se introdujo tras el accidente mortal de ¿qué piloto?",
+        "opciones": [
+            "Ayrton Senna",
+            "Gilles Villeneuve",
+            "Ronald Ratzenberger",
+            "Jules Bianchi"
+        ],
+        "correcta": "Jules Bianchi"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué pequeño principado se encuentra entre España y Francia?",
+        "opciones": [
+            "San Marino",
+            "Liechtenstein",
+            "Andorra",
+            "Mónaco"
+        ],
+        "correcta": "Andorra"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el lago más grande del continente africano?",
+        "opciones": [
+            "Lago Malawi",
+            "Lago Victoria",
+            "Lago Turkana",
+            "Lago Tanganica"
+        ],
+        "correcta": "Lago Victoria"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué ciudad es la capital de Suiza?",
+        "opciones": [
+            "Zúrich",
+            "Wien",
+            "Frankfurt",
+            "Berna"
+        ],
+        "correcta": "Berna"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué país tiene la abreviatura CH?",
+        "opciones": [
+            "China",
+            "Suiza",
+            "Ningún país",
+            "Canadá"
+        ],
+        "correcta": "Suiza"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el país más pequeño de América del Sur por área?",
+        "opciones": [
+            "Uruguay",
+            "Chile",
+            "Surinam",
+            "Brasil"
+        ],
+        "correcta": "Surinam"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál de estos países NO se encuentra en África?",
+        "opciones": [
+            "Burkina Faso",
+            "Mozambique",
+            "Suriname",
+            "Argelia"
+        ],
+        "correcta": "Suriname"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Durante qué guerra se produjo la Crisis de los Misiles Cubanos?",
+        "opciones": [
+            "Guerra Revolucionaria",
+            "Primera Guerra Mundial",
+            "Guerra Fría",
+            "Segunda Guerra Mundial"
+        ],
+        "correcta": "Guerra Fría"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿De qué nacionalidad era el creador de la maquina enigma?",
+        "opciones": [
+            "Polaco",
+            "Británico",
+            "Americano",
+            "Alemán"
+        ],
+        "correcta": "Alemán"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué misión Apolo fue la última del programa Apolo de la NASA?",
+        "opciones": [
+            "Apolo 15",
+            "Apolo 13",
+            "Apolo 11",
+            "Apolo 17"
+        ],
+        "correcta": "Apolo 17"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿En qué año comenzó la Primera Guerra Mundial?",
+        "opciones": [
+            "1914",
+            "1930",
+            "1917",
+            "1939"
+        ],
+        "correcta": "1914"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Cuáles fueron los primeros estados que se separaron de Yugoslavia?",
+        "opciones": [
+            "Eslovenia, Croacia",
+            "Eslovenia, Macedonia",
+            "Montenegro, Eslovenia",
+            "Macedonia, Montenegro"
+        ],
+        "correcta": "Eslovenia, Croacia"
     }
 ]

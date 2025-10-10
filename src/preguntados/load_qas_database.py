@@ -12,7 +12,7 @@ def generar_base_preguntas():
     for cat in categorias:
         # Descarga las preguntas de la API en formato JSON que posteriormente se trabaja como dict
         print(f" Descargando categoría {cat}...")
-        url = f"https://opentdb.com/api.php?amount=20&category={cat}&type=multiple&difficulty=easy"
+        url = f"https://opentdb.com/api.php?amount=20&category={cat}&type=multiple&difficulty=medium"
         resp = requests.get(url)
         if resp.status_code == 200:
             data = resp.json()
