@@ -73,8 +73,6 @@ class TrivIA(object):
         print(self.consoleFormatter.format("Comenzando el juego de Preguntados", "HEADER"))
         self.tm.talk("Cuantas rondas de preguntas quieres jugar?")
         rounds_text = self.tm.speech2text_srv()
-        """Nota: El numero debe traducirse del lenguaje al valor numerico. Ejemplo: "cinco" -> 5
-        Se requiere una implementacion que haga esta traduccion."""
         try:
             self.total_rounds = int(rounds_text)
         except ValueError:
