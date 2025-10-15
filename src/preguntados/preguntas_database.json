@@ -319,7 +319,7 @@
         "correcta": "Michael Keaton"
     },
     {
-        "categoria": "Entretenimiento: Película",
+        "categoria": "Entretenimiento: Cine",
         "pregunta": "¿Qué película estrenada en 2016 presenta a Superman y Batman peleando?",
         "opciones": [
             "Batman vs Superman: Apocalipsis",
@@ -330,7 +330,7 @@
         "correcta": "Batman vs Superman: El origen de la justicia"
     },
     {
-        "categoria": "Entretenimiento: Película",
+        "categoria": "Entretenimiento: Cine",
         "pregunta": "La película animada de Disney de 2016 Moana ¿En qué cultura se basa?",
         "opciones": [
             "Nórdica",
@@ -352,7 +352,7 @@
         "correcta": "Batman"
     },
     {
-        "categoria": "Entretenimiento: Película",
+        "categoria": "Entretenimiento: Cine",
         "pregunta": "¿Cómo se llama el robot naranja y blanco en Star Wars: El despertar de la fuerza?",
         "opciones": [
             "BB8",
@@ -2242,5 +2242,170 @@
             "Macedonia, Montenegro"
         ],
         "correcta": "Eslovenia, Croacia"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál de estos países limita con Polonia?",
+        "opciones": [
+            "Lituania",
+            "Noruega",
+            "Francia",
+            "Países Bajos"
+        ],
+        "correcta": "Lituania"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué país tiene tres capitales?",
+        "opciones": [
+            "Somalia",
+            "China",
+            "Sudáfrica",
+            "Reino Unido"
+        ],
+        "correcta": "Sudáfrica"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el quinto país más grande por área?",
+        "opciones": [
+            "Australia",
+            "Brasil",
+            "India",
+            "Estados Unidos"
+        ],
+        "correcta": "Brasil"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Dónde está el área comúnmente conocida como Triángulo de las Bermudas?",
+        "opciones": [
+            "Océano Pacífico Norte, entre Japón y Estados Unidos",
+            "Océano Pacífico Sur, lejos de Chile",
+            "En el Mar Caribe",
+            "Océano Atlántico Norte, entre Florida y Puerto Rico"
+        ],
+        "correcta": "Océano Atlántico Norte, entre Florida y Puerto Rico"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es la isla no continental más grande del mundo?",
+        "opciones": [
+            "Borneo",
+            "Madagascar",
+            "Groenlandia",
+            "Nueva Guinea"
+        ],
+        "correcta": "Groenlandia"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Qué país europeo no forma parte de la Union Europea?",
+        "opciones": [
+            "Chequia",
+            "Irlanda",
+            "Lituania",
+            "Noruega"
+        ],
+        "correcta": "Noruega"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuántos países soberanos hay dentro del continente de América del Sur?",
+        "opciones": [
+            "10",
+            "8",
+            "12",
+            "9"
+        ],
+        "correcta": "12"
+    },
+    {
+        "categoria": "Geografía",
+        "pregunta": "¿Cuál es el río más largo del mundo?",
+        "opciones": [
+            "Yangtze",
+            "Misuri",
+            "Nilo",
+            "Amazonía"
+        ],
+        "correcta": "Nilo"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "Hera es diosa de...",
+        "opciones": [
+            "Agricultura",
+            "Guerra",
+            "Mar",
+            "Matrimonio"
+        ],
+        "correcta": "Matrimonio"
+    },
+    {
+        "categoria": "Mitología",
+        "pregunta": "¿Qué dios/diosa griega arrojó una manzana dorada con las palabras para la más bella? en medio de la fiesta de los dioses?",
+        "opciones": [
+            "Eris",
+            "Artemisa",
+            "Hades",
+            "Ares"
+        ],
+        "correcta": "Eris"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "La Bomba Zar, la bomba nuclear más poderosa jamás probada, tenía un rendimiento de 50 megatones, pero teóricamente tenía un rendimiento máximo de ¿cuánto?",
+        "opciones": [
+            "150 Megatones",
+            "200 Megatones",
+            "75 Megatones",
+            "100 Megatones"
+        ],
+        "correcta": "100 Megatones"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Qué enfermedad paralizó al presidente Franklin D. Roosevelt y lo llevó a ayudar a la nación a encontrar una cura? ",
+        "opciones": [
+            "Cáncer",
+            "VIH",
+            "Meningitis",
+            "Polio"
+        ],
+        "correcta": "Polio"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Quién acuñó la famosa frase Pienso, luego existo?",
+        "opciones": [
+            "Shakespeare",
+            "Descartes",
+            "Aristóteles",
+            "Platón"
+        ],
+        "correcta": "Descartes"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Cuál de las siguientes batallas se considera a menudo como el comienzo de la caída del Imperio Romano Occidental?",
+        "opciones": [
+            "Batalla de Constantinopla",
+            "Batalla de Pollentia",
+            "Batalla de Adrianópolis",
+            "Batalla de Tesalónica"
+        ],
+        "correcta": "Batalla de Adrianópolis"
+    },
+    {
+        "categoria": "Historia",
+        "pregunta": "¿Cuántas veces se casó Albert Einstein en su vida?",
+        "opciones": [
+            "Cinco",
+            "Dos",
+            "Tres veces",
+            "Una vez"
+        ],
+        "correcta": "Dos"
     }
 ]

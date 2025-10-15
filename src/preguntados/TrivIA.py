@@ -7,9 +7,14 @@ import os
 import ConsoleFormatter
 import random
 import json
-import random
-
-class Preguntados(object):
+class TrivIA(object):
+    """Clase que representa el juego de Preguntados implementado como una máquina de estados.
+    Atributos:
+        consoleFormatter (ConsoleFormatter): Formateador de texto para consola.
+        task_name (str): Nombre del task.
+        tm (task_module): Módulo de tareas para interacción con el robot.
+        qas (dict): Diccionario con preguntas y respuestas.
+    """
     def __init__(self) -> None:
         self.consoleFormatter=ConsoleFormatter.ConsoleFormatter()
         self.task_name = "PREGUNTADOS"
@@ -17,7 +22,7 @@ class Preguntados(object):
         states =  ["PREGUNTADOS", "INIT", "WAIT4GUEST", "QASPROCESSING"]
         self.tm = tm(speech=True, pytoolkit=True)
         self.tm.initialize_node(self.task_name)
-        self.qas = cargar_preguntas()
+        self.qas = self.cargar_preguntas()
         '''
         Los estados son:
         - PREGUNTADOS: Estado inicial del juego.
@@ -31,7 +36,7 @@ class Preguntados(object):
         # TODO: Implementar funciones varias que permitan el movimiento y expresion del robot
         # TODO: Deteccion de numeros mediante entrada de voz
         # TODO: Manejo de errores y excepciones
-        # TODO: Documentacion, depuracion y legibilidad del codigo
+
         # Se definen las transiciones entre estados
         transitions = [
             {"trigger": "start", "source": "TRIVIA", "dest": "INIT"},
@@ -40,7 +45,7 @@ class Preguntados(object):
             {"trigger": "ask_question", "source": "PREGUNTADOS", "dest": "QASPROCESSING"},
             {"trigger": "restart", "source": "PREGUNTADOS", "dest": "WAIT4GUEST"},
         ]
-        self.machine = Machine(model=self, states=states, transitions=transitions, initial='PREGUNTADOS')
+        self.machine = Machine(model=self, states=states, transitions=transitions, initial='TRIVIA')
         rospy_check = threading.Thread(target=self.check_rospy)
         rospy_check.start()
         
@@ -105,27 +110,42 @@ class Preguntados(object):
         self.current_question = pregunta
         self.current_answers = respuestas
         # Preguntar mediante talk y ofrecer las opciones
-        self.tm.talk(f"Pregunta {self.question_number}: {pregunta}. Las opciones son: {', '.join(respuestas)}. Por favor, dime tu respuesta.")
+        self.tm.talk(
+        f"Pregunta {self.question_number}: {pregunta}. "
+        f"Las opciones son: {', '.join(respuestas['options'])}."
+        "Por favor, responde con la opcion correcta.")
         respuesta = self.tm.speech2text_srv()
         # Validar que la respuesta este entre las opciones, en la pantalla muestra si es correcto o no
-        if respuesta in self.current_answers:
+        if respuesta in self.current_answers["options"]:
             print(self.consoleFormatter.format("He escuchado: "+respuesta, "OKGREEN"))
             self.answer = respuesta
         else:
             self.tm.talk("No he podido entender tu respuesta. Por favor, intenta de nuevo.")
             self.answer = None
         # Se verifica si la respuesta es correcta, en patalla se muestra el puntaje actual
-        if self.answer == self.current_answers["correct"]:
-            self.is_correct = True
-        else:
-            self.is_correct = False
+        self.is_correct = (self.answer == self.current_answers["correct"])
         ''''Se muestra el puntaje en pantalla, falta implementacion de parte de interface para esto'''
         self.question_number += 1
         
     
     """Funciones auxiliares"""
     
-    def cargar_preguntas():
-        # Falta definir si se usa un JSON custom o OpenTDB
-        pass
-    
+    def cargar_preguntas(self):
+        with open("preguntas_database.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+        qas = {}
+        for item in data:
+            categoria = item["categoria"]
+            pregunta = item["pregunta"]
+            opciones = item["opciones"]
+            correcta = item["correcta"]
+            if categoria == "Entretenimiento: Libros" or categoria == "Entretenimiento: Cine" or categoria == "Entretenimiento: Videojuegos" or categoria == "Entretenimiento: Televisión" or categoria == "Entretenimiento: Película":
+                categoria = "Entretenimiento"
+            if categoria == "Ciencia & Naturaleza" or categoria == "Ciencia: Computadoras" or categoria == "Ciencia: Matemáticas":
+                categoria = "Ciencia"
+            if categoria == "Mitología":
+                categoria = "Historia"
+            if categoria not in qas:
+                qas[categoria] = []
+            qas[categoria].append((pregunta, {"options": opciones, "correct": correcta}))
+        return qas
