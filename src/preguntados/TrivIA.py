@@ -139,13 +139,16 @@ class TrivIA(object):
             pregunta = item["pregunta"]
             opciones = item["opciones"]
             correcta = item["correcta"]
-            if categoria == "Entretenimiento: Libros" or categoria == "Entretenimiento: Cine" or categoria == "Entretenimiento: Videojuegos" or categoria == "Entretenimiento: Televisión" or categoria == "Entretenimiento: Película":
+            if "Entretenimiento" in categoria:
                 categoria = "Entretenimiento"
-            if categoria == "Ciencia & Naturaleza" or categoria == "Ciencia: Computadoras" or categoria == "Ciencia: Matemáticas":
+            elif "Ciencia" in categoria:
                 categoria = "Ciencia"
-            if categoria == "Mitología":
+            elif "Mitología" in categoria:
                 categoria = "Historia"
             if categoria not in qas:
                 qas[categoria] = []
             qas[categoria].append((pregunta, {"options": opciones, "correct": correcta}))
+        print("Preguntas cargadas y clasificadas en:")
+        for cat, preguntas in qas.items():
+            print(f"{cat}: {len(preguntas)} preguntas")
         return qas
