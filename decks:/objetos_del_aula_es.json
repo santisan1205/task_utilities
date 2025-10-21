@@ -1,0 +1,46 @@
+{
+  "category": "objetos_del_aula",
+  "language": "es",
+  "cards": [
+    {
+      "id": "pencil",
+      "label": "Lápiz",
+      "image": "img/classroom/pencil.png"
+    },
+    {
+      "id": "pen",
+      "label": "Esfero",
+      "image": "img/classroom/pen.png"
+    },
+    {
+      "id": "notebook",
+      "label": "Cuaderno",
+      "image": "img/classroom/notebook.png"
+    },
+    {
+      "id": "book",
+      "label": "Libro",
+      "image": "img/classroom/book.png"
+    },
+    {
+      "id": "eraser",
+      "label": "Borrador",
+      "image": "img/classroom/eraser.png"
+    },
+    {
+      "id": "ruler",
+      "label": "Regla",
+      "image": "img/classroom/ruler.png"
+    },
+    {
+      "id": "scissors",
+      "label": "Tijeras",
+      "image": "img/classroom/scissors.png"
+    },
+    {
+      "id": "glue",
+      "label": "Colbón",
+      "image": "img/classroom/glue.png"
+    }
+  ]
+}

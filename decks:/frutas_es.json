@@ -1,0 +1,46 @@
+{
+  "category": "frutas",
+  "language": "es",
+  "cards": [
+    {
+      "id": "apple",
+      "label": "Manzana",
+      "image": "img/fruits/apple.png"
+    },
+    {
+      "id": "banana",
+      "label": "Banana",
+      "image": "img/fruits/banana.png"
+    },
+    {
+      "id": "orange",
+      "label": "Naranja",
+      "image": "img/fruits/orange.png"
+    },
+    {
+      "id": "grape",
+      "label": "Uva",
+      "image": "img/fruits/grape.png"
+    },
+    {
+      "id": "pear",
+      "label": "Pera",
+      "image": "img/fruits/pear.png"
+    },
+    {
+      "id": "pineapple",
+      "label": "Piña",
+      "image": "img/fruits/pineapple.png"
+    },
+    {
+      "id": "strawberry",
+      "label": "Fresa",
+      "image": "img/fruits/strawberry.png"
+    },
+    {
+      "id": "watermelon",
+      "label": "Sandía",
+      "image": "img/fruits/watermelon.png"
+    }
+  ]
+}
