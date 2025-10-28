@@ -8,7 +8,7 @@ juego_memoria.py — Juego de memoria para Pepper
 """
 
 from __future__ import annotations
-import json, random, pathlib, time, os, threading
+import json, random, time, os, threading
 from typing import List, Dict, Any, Optional
 
 import rospy
@@ -21,50 +21,43 @@ class JuegoMemoria(object):
     Clase única que contiene:
     - FSM (states + transitions)
     - Voz (say/listen)
-    - Carga de config/decks
+    - Carga de config/decks desde el mismo directorio
     - Lógica del juego (flip/puntajes/ganador) SIN clases externas
     """
 
-    # ---------- FSM ----------
     STATES = [
-        "INIT",
-        "INTRO",
-        "ASK_MODE",
-        "SETUP_GAME",   # pide categoría + carga deck + arma tablero + crea juego
-        "LOOP",
-        "SAY_RESULT",
-        "ERROR_EXIT",
+        "INIT", "INTRO", "ASK_MODE", "SETUP_GAME",
+        "LOOP", "SAY_RESULT", "ERROR_EXIT"
     ]
+
     TRANSITIONS = [
         {"trigger": "start",        "source": "INIT",       "dest": "INTRO"},
         {"trigger": "go_ask_mode",  "source": "INTRO",      "dest": "ASK_MODE"},
         {"trigger": "mode_ok",      "source": "ASK_MODE",   "dest": "SETUP_GAME"},
         {"trigger": "setup_ok",     "source": "SETUP_GAME", "dest": "LOOP"},
         {"trigger": "say_results",  "source": "LOOP",       "dest": "SAY_RESULT"},
-        {"trigger": "play_again",   "source": "SAY_RESULT", "dest": "ASK_MODE"},   # ciclo infinito
-        {"trigger": "error",        "source": "*",          "dest": "ERROR_EXIT"}, # error global
+        {"trigger": "play_again",   "source": "SAY_RESULT", "dest": "ASK_MODE"},
+        {"trigger": "error",        "source": "*",          "dest": "ERROR_EXIT"},
     ]
 
-    # ---------- INIT ----------
     def __init__(self, voice: bool = True):
-        # Pepper
+        # Inicializar Pepper
         self.tm = TM(speech=True, pytoolkit=True)
         self.tm.initialize_node("JUEGO_MEMORIA_FSM")
         self.tm.initialize_pepper()
 
-        # Config voz
+        # Configuración de voz
         self.voice = voice
         self.tts_lang = "Spanish"
         self.stt_lang = "spa"
         self.max_retries = 3
 
-        # Selecciones
-        self.mode: Optional[str] = None                # "solo" | "versus"
-        self.category: Optional[str] = None            # "animales" | "frutas" | "objetos_del_aula"
+        # Variables del juego
+        self.mode: Optional[str] = None
+        self.category: Optional[str] = None
         self.language: str = "es"
 
-        # Recursos de juego (en una sola clase)
-        self.cfg: Dict[str, Any] = self._load_config("./game_config.json")
+        self.cfg: Dict[str, Any] = self._load_config("game_config.json")
         self.deck: Optional[Dict[str, Any]] = None
         self.board: Optional[List[Dict[str, Any]]] = None
         self.players: List[str] = []
@@ -81,56 +74,62 @@ class JuegoMemoria(object):
         self._wd = threading.Thread(target=self._check_ros_shutdown, daemon=True)
         self._wd.start()
 
-    # ---------- Helpers de voz ----------
-        self.board: Optional[List[Dict[str, Any]]] = None
+    # ---------- Voz ----------
     def say(self, text: str):
-        # mantener firma simple para evitar errores (algunas implementaciones no aceptan wait/animated)
+        """Hablar con Pepper."""
         self.tm.talk(text=text, language=self.tts_lang)
 
     def listen(self, seconds: int = 4) -> str:
+        """Escuchar entrada por voz."""
         return self.tm.speech2text_srv(seconds=seconds, lang=self.stt_lang) or ""
 
-    # ---------- Helpers utilitarios (antes eran funciones sueltas) ----------
-    def _load_config(self, path: str | pathlib.Path) -> Dict[str, Any]:
-        p = pathlib.Path(path)
-        data = json.loads(p.read_text(encoding="utf-8"))
+    # ---------- Carga segura de archivos ----------
+    def _get_local_path(self, filename: str) -> str:
+        """Devuelve la ruta absoluta de un archivo en la misma carpeta del script."""
+        base_dir = os.path.dirname(__file__)
+        return os.path.join(base_dir, filename)
+
+    def _load_config(self, filename: str = "game_config.json") -> Dict[str, Any]:
+        """Carga y valida la configuración global del juego."""
+        file_path = self._get_local_path(filename)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"No se encontró {filename} en {os.path.dirname(__file__)}")
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
         if "modes" not in data or "categories" not in data:
             raise ValueError("game_config.json debe tener 'modes' y 'categories'.")
         return data
 
-    def _load_deck_json(self, path: str | pathlib.Path) -> Dict[str, Any]:
-        p = pathlib.Path(path)
-        data = json.loads(p.read_text(encoding="utf-8"))
+    def _load_deck_json(self, filename: str) -> Dict[str, Any]:
+        """Carga un mazo JSON de la misma carpeta que el script."""
+        file_path = self._get_local_path(filename)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"No se encontró el mazo: {filename}")
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
         for k in ("category", "language", "cards"):
             if k not in data:
-                raise ValueError(f"Deck inválido: falta '{k}' en {path}")
-        cards = data["cards"]
-        if len(cards) != 8:
-            raise ValueError(f"Deck debe tener 8 ítems únicos; tiene {len(cards)} en {path}")
-        seen = set()
-        for c in cards:
-            for k in ("id", "label", "image"):
-                if k not in c:
-                    raise ValueError(f"Carta inválida (falta '{k}'): {c}")
-            if c["id"] in seen:
-                raise ValueError(f"IDs repetidos: {c['id']}")
-            seen.add(c["id"])
+                raise ValueError(f"Deck inválido: falta '{k}' en {filename}")
         return data
 
     def _build_board_from_deck(self, deck: Dict[str, Any], seed: Optional[int] = None) -> List[Dict[str, Any]]:
+        """Duplica las cartas para crear pares y las baraja."""
         duplicated: List[Dict[str, Any]] = []
         for c in deck["cards"]:
-            duplicated.append({"uid": f"{c['id']}#1", "pid": c["id"], "label": c["label"], "image": c["image"], "state": "down"})
-            duplicated.append({"uid": f"{c['id']}#2", "pid": c["id"], "label": c["label"], "image": c["image"], "state": "down"})
-        rng = random.Random(seed)
-        rng.shuffle(duplicated)
+            duplicated.extend([
+                {"uid": f"{c['id']}#1", "pid": c["id"], "label": c["label"], "image": c["image"], "state": "down"},
+                {"uid": f"{c['id']}#2", "pid": c["id"], "label": c["label"], "image": c["image"], "state": "down"}
+            ])
+        random.Random(seed).shuffle(duplicated)
         return duplicated
 
+    # ---------- Normalización y matching ----------
     def _norm(self, text: str) -> str:
         if not text: return ""
         t = text.lower().strip()
         rep = {"ó":"o","á":"a","é":"e","í":"i","ú":"u"," uno contra uno ":" versus "," vs ":" versus "}
-        for k,v in rep.items(): t = t.replace(k, v)
+        for k, v in rep.items():
+            t = t.replace(k, v)
         return t
 
     def _match_mode(self, text: str) -> Optional[str]:
@@ -143,9 +142,10 @@ class JuegoMemoria(object):
         t = self._norm(text)
         if "animales" in t or "animal" in t:  return "animales"
         if "fruta" in t or "frutas" in t:     return "frutas"
-        if "objetos del aula" in t or "objetos" in t or "aula" in t or "salon" in t: return "objetos_del_aula"
+        if "objetos" in t or "aula" in t or "salon" in t: return "objetos_del_aula"
         return None
 
+    # ---------- Utilidades de control ----------
     def _reset_round(self):
         """Limpia recursos de la ronda previa (para volver a ASK_MODE)."""
         self.category = None
@@ -159,22 +159,16 @@ class JuegoMemoria(object):
         self.finished = False
 
     def _hard_exit(self):
-        """Salida directa del proceso (se invoca si dice 'salir')."""
+        """Salida inmediata del programa."""
         try:
             self.say("Hasta pronto.")
         finally:
             os._exit(os.EX_OK)
 
-    # ---------- Motor del juego (antes era otra clase) ----------
-    @property
-    def current_player(self) -> str:
-        return self.players[self.current_player_idx]
-
-    def _game_over(self) -> bool:
-        return all(c["state"] == "matched" for c in self.board)
-
+    # ---------- Motor del juego ----------
     def _flip(self, index: int) -> Dict[str, Any]:
-        if self.finished: 
+        """Voltea cartas y resuelve si hay match."""
+        if self.finished:
             return {"ok": False, "reason": "finished"}
         if not (0 <= index < len(self.board)):
             return {"ok": False, "reason": "invalid_index"}
@@ -183,15 +177,12 @@ class JuegoMemoria(object):
         if card["state"] != "down":
             return {"ok": False, "reason": "card_not_down"}
 
-        # Voltear
         card["state"] = "up"
         self.flips_buffer.append(index)
 
-        # Primera
         if len(self.flips_buffer) == 1:
-            return {"ok": True, "action": "flip_first", "player": self.current_player, "index": index}
+            return {"ok": True, "action": "flip_first", "index": index}
 
-        # Segunda → resolver
         if len(self.flips_buffer) == 2:
             i, j = self.flips_buffer
             c1, c2 = self.board[i], self.board[j]
@@ -199,181 +190,135 @@ class JuegoMemoria(object):
 
             if c1["pid"] == c2["pid"]:
                 c1["state"] = c2["state"] = "matched"
-                self.scores[self.current_player] += 1
+                self.scores[self.players[self.current_player_idx]] += 1
                 self.flips_buffer.clear()
-
-                if self._game_over():
+                if all(c["state"] == "matched" for c in self.board):
                     self.finished = True
-                    return {"ok": True, "action": "match_and_finish", "i": i, "j": j,
-                            "scores": self.scores, "moves": self.moves, "winner": self._winner()}
-                return {"ok": True, "action": "match", "i": i, "j": j,
-                        "scores": self.scores, "moves": self.moves,
-                        "extra_turn": (self.mode == "versus")}
+                    return {"ok": True, "action": "match_and_finish", "winner": self._winner()}
+                return {"ok": True, "action": "match"}
             else:
                 c1["state"] = c2["state"] = "down"
                 self.flips_buffer.clear()
                 if self.mode == "versus":
                     self.current_player_idx = 1 - self.current_player_idx
+                return {"ok": True, "action": "mismatch"}
 
-                if self._game_over():
-                    self.finished = True
-                    return {"ok": True, "action": "mismatch_and_finish", "i": i, "j": j,
-                            "scores": self.scores, "moves": self.moves, "winner": self._winner()}
-                return {"ok": True, "action": "mismatch", "i": i, "j": j,
-                        "scores": self.scores, "moves": self.moves}
-
-        # Seguridad
-        return {"ok": True, "action": "flip_extra", "index": index}
+        return {"ok": True, "action": "flip_extra"}
 
     def _winner(self) -> Optional[str]:
         if self.mode == "solo":
-            return self.players[0] if self.players else None
-        if not self.players: 
+            return self.players[0]
+        if self.scores[self.players[0]] > self.scores[self.players[1]]:
+            return self.players[0]
+        elif self.scores[self.players[1]] > self.scores[self.players[0]]:
+            return self.players[1]
+        else:
             return None
-        p1, p2 = self.players
-        if self.scores.get(p1,0) > self.scores.get(p2,0): return p1
-        if self.scores.get(p2,0) > self.scores.get(p1,0): return p2
-        return None
-
-    def _report(self) -> Dict[str, Any]:
-        return {
-            "mode": self.mode, "players": self.players, "moves": self.moves,
-            "scores": self.scores, "category": self.category, "language": self.language,
-            "finished": self.finished, "winner": self._winner(),
-        }
 
     # ---------- ESTADOS ----------
     def on_enter_INTRO(self):
         self.say("Hola. Vamos a jugar memoria. Debes voltear dos cartas iguales para ganar puntos.")
-        time.sleep(0.2)
+        time.sleep(0.3)
         self.say("Primero elegiremos el modo y la categoría.")
         self.go_ask_mode()
 
     def on_enter_ASK_MODE(self):
-        self.mode = None
         retries = 0
-        while retries < self.max_retries and self.mode is None:
+        self.mode = None
+        while retries < self.max_retries and not self.mode:
             if self.voice:
-                self.say("Di el modo: solo, o versus. También puedes decir: salir.")
+                self.say("Di el modo: solo o versus. También puedes decir salir.")
                 utter = self.listen(4)
                 if "salir" in self._norm(utter):
                     self._hard_exit(); return
-                m = self._match_mode(utter)
+                self.mode = self._match_mode(utter)
             else:
-                m = "versus"  # default sin voz
-            if m:
-                self.mode = m
-                self.say("Modo solo seleccionado." if m == "solo" else "Modo versus seleccionado.")
+                self.mode = "versus"
+            if self.mode:
+                self.say("Modo seleccionado: " + self.mode)
                 self.mode_ok(); return
             retries += 1
-            self.say("No te entendí. Repite: solo, o versus.")
-        if self.mode is None:
-            self.say("No logré entender el modo.")
-            self.error()
+            self.say("No te entendí, repite.")
+        self.error()
 
     def on_enter_SETUP_GAME(self):
-        """Pide categoría, carga deck, construye tablero y prepara partida."""
+        """Pide categoría, carga deck y prepara tablero."""
         try:
-            # Categoría
-            self.category = None
             retries = 0
-            while retries < self.max_retries and self.category is None:
+            self.category = None
+            while retries < self.max_retries and not self.category:
                 if self.voice:
-                    self.say("Elige categoría: animales, frutas, u objetos del aula. También puedes decir: salir.")
+                    self.say("Elige categoría: animales, frutas u objetos del aula. También puedes decir salir.")
                     utter = self.listen(5)
                     if "salir" in self._norm(utter):
                         self._hard_exit(); return
-                    c = self._match_category(utter)
+                    self.category = self._match_category(utter)
                 else:
-                    c = "animales"
-                if c:
-                    self.category = c
-                    bonito = {"animales":"Animales","frutas":"Frutas","objetos_del_aula":"Objetos del aula"}[c]
-                    self.say(f"Categoría {bonito} seleccionada.")
-                    break
-                retries += 1
-                self.say("No te entendí. Di: animales, frutas, u objetos del aula.")
-            if self.category is None:
-                self.say("No logré entender la categoría.")
+                    self.category = "animales"
+                if not self.category:
+                    retries += 1
+                    self.say("No te entendí. Repite por favor.")
+            if not self.category:
                 self.error(); return
 
-            # Cargar deck y tablero
-            deck_path = pathlib.Path("decks") / f"{self.category}_es.json"
-            self.deck = self._load_deck_json(deck_path)
-            self.board = self._build_board_from_deck(self.deck, seed=None)
+            self.say(f"Cargando cartas de {self.category}.")
+            self.deck = self._load_deck_json(f"{self.category}_es.json")
+            self.board = self._build_board_from_deck(self.deck)
 
-            # Inicializar partida
             self.players = ["Ana", "Luis"] if self.mode == "versus" else ["Tú"]
-            self.current_player_idx = 0
-            self.scores = {name: 0 for name in self.players}
+            self.scores = {p: 0 for p in self.players}
             self.moves = 0
-            self.flips_buffer = []
             self.finished = False
 
-            self.say(f"Iniciando partida. Modo {self.mode}. Categoría {self.category.replace('_',' ')}.")
-            # Hook UI
-            game_url = f"http://<TU_IP>:<PUERTO>/index.html?mode={self.mode}&category={self.category}&lang=es"
-            print("[juego_memoria] Si tienes UI web, abrir:", game_url)
-
+            self.say(f"Iniciando partida. Modo {self.mode}, categoría {self.category}.")
             self.setup_ok()
         except Exception as e:
             print("[juego_memoria] Error en SETUP_GAME:", e)
-            self.say("Ocurrió un problema preparando la partida.")
+            self.say("Ocurrió un problema cargando el mazo.")
             self.error()
 
     def on_enter_LOOP(self):
-        """
-        Integra aquí tu UI/voz para voltear cartas:
-          - UI: self._flip(idx)
-          - Voz: 'voltea fila 2 columna 3' → idx → self._flip(idx)
-        Cuando quieras anunciar, llama: self.say_results()
-        """
+        """Simulación temporal de jugadas."""
         try:
-            # DEMO mínima: dos jugadas
             r1 = self._flip(0); r2 = self._flip(1)
             print("Jugada 1:", r1, r2)
             if r2.get("action") == "match": self.say("¡Acierto!")
-            elif r2.get("action") == "mismatch": self.say("No coinciden. Siguiente turno.")
+            elif r2.get("action") == "mismatch": self.say("No coinciden.")
 
             r3 = self._flip(2); r4 = self._flip(3)
             print("Jugada 2:", r3, r4)
-
             self.say_results()
         except Exception as e:
             print("[juego_memoria] Error en LOOP:", e)
             self.error()
 
     def on_enter_SAY_RESULT(self):
-        """Anuncia resultados y vuelve al ASK_MODE (ciclo infinito)."""
+        """Anuncia resultados y vuelve a preguntar modo."""
         try:
-            rep = self._report()
-            print("Reporte:", rep)
-            if rep["finished"]:
-                if rep["winner"]:
-                    self.say(f"Juego terminado. Ganador: {rep['winner']}. Puntajes: {rep['scores']}.")
+            winner = self._winner()
+            if self.finished:
+                if winner:
+                    self.say(f"Juego terminado. Ganador: {winner}. Puntajes: {self.scores}.")
                 else:
-                    self.say(f"Juego terminado. Empate. Puntajes: {rep['scores']}.")
+                    self.say(f"Juego terminado. Empate. Puntajes: {self.scores}.")
             else:
-                self.say(f"Partida en curso. Puntajes: {rep['scores']}.")
-            # Reset y volver a modo
+                self.say(f"Partida en curso. Puntajes: {self.scores}.")
             self._reset_round()
-            time.sleep(0.2)
-            self.say("¿Jugamos otra vez? Vamos a seleccionar el modo.")
+            self.say("¿Jugamos otra vez? Selecciona el modo.")
             self.play_again()
         except Exception as e:
             print("[juego_memoria] Error al anunciar resultados:", e)
             self.error()
 
     def on_enter_ERROR_EXIT(self):
-        """Salida por error."""
+        """Manejo global de errores."""
         self.say("Ha ocurrido un error. Cerrando el juego.")
         os._exit(os.EX_OK)
 
-    # ---------- Infra ROS ----------
+    # ---------- ROS ----------
     def _check_ros_shutdown(self):
         while not rospy.is_shutdown():
             time.sleep(0.1)
-        print("[juego_memoria] ROS shutdown. Saliendo.")
         os._exit(os.EX_OK)
 
     def run(self):
@@ -386,3 +331,4 @@ class JuegoMemoria(object):
 if __name__ == "__main__":
     jm = JuegoMemoria(voice=True)
     jm.run()
+
