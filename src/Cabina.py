@@ -36,15 +36,18 @@ class CabinaSinfonIA(object):
         ]
 
         self.machine = Machine(model=self, states=states, transitions=transitions, initial='INIT')
-
-        threading.Thread(target=self._watch_ros, daemon=True).start()
-
+        
         self.sub = None
+        
+        rospy_check = threading.Thread(target=self.check_rospy)
+        rospy_check.start()
+
+
 
     def on_enter_INIT(self):
         print(self.console.format("INIT", "HEADER"))
         self.tm.initialize_pepper()
-        self.tm.talk(text = "Hola, quieres tomarte una foto?")
+        self.tm.talk(text = "Hola, quieres tomarte una foto?", language="Spanish")
         self.begin()
 
     def on_enter_ASK(self):
@@ -94,11 +97,15 @@ class CabinaSinfonIA(object):
             self.on_enter_SNAP()
         elif self.state == 'DONE':
             self.on_enter_DONE()
+            
+    def check_rospy(self):
+        #Termina todos los procesos al cerrar el nodo
+        while not rospy.is_shutdown():
+            rospy.sleep(0.1)
+        print(self.consoleFormatter.format("Shutting down", "FAIL"))
+        os._exit(os.EX_OK)
     
 if __name__ == "__main__":
     bot = CabinaSinfonIA()
     bot.run_once()
     rospy.spin()
-
-
-
