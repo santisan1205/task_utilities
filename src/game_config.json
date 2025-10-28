@@ -5,19 +5,19 @@
       "id": "animales",
       "label_es": "Animales",
       "label_en": "Animals",
-      "deck_path": "decks/animales_es.json"
+      "deck_path": "animales_es.json"
     },
     {
       "id": "frutas",
       "label_es": "Frutas",
       "label_en": "Fruits",
-      "deck_path": "decks/frutas_es.json"
+      "deck_path": "frutas_es.json"
     },
     {
       "id": "objetos_del_aula",
       "label_es": "Objetos del aula",
       "label_en": "Classroom objects",
-      "deck_path": "decks/objetos_del_aula_es.json"
+      "deck_path": "objetos_del_aula_es.json"
     }
   ],
   "languages": ["es", "en"],
@@ -28,3 +28,4 @@
     "description": "Configuración global del juego de memoria para Pepper. Define modos, categorías y soporte de idiomas."
   }
 }
+
