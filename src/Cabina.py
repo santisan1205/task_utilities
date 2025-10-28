@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from transitions import Machine
 from task_module import Task_module as tm
 import ConsoleFormatter
@@ -12,7 +13,7 @@ from cv_bridge import CvBridge, CvBridgeError
 
 ##dos estados: INIT, uno que vuelva a ask y uno que permita tomar la foto desde la tablet 
 
-class CabinaSinfonIA:
+class CabinaSinfonIA(object):
     CAMERA_TOPIC = "/camera/rgb/image_raw"
     SAVE_DIR = os.path.expanduser("~/mercadito_photos")
 
@@ -94,10 +95,10 @@ class CabinaSinfonIA:
         elif self.state == 'DONE':
             self.on_enter_DONE()
     
-    if __name__ == "__main__":
-        bot = CabinaSinfonIA()
-        bot.run_once()
-        rospy.spin()
+if __name__ == "__main__":
+    bot = CabinaSinfonIA()
+    bot.run_once()
+    rospy.spin()
 
 
 

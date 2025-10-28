@@ -64,7 +64,7 @@ class JuegoMemoria(object):
         self.language: str = "es"
 
         # Recursos de juego (en una sola clase)
-        self.cfg: Dict[str, Any] = self._load_config("game_config.json")
+        self.cfg: Dict[str, Any] = self._load_config("./game_config.json")
         self.deck: Optional[Dict[str, Any]] = None
         self.board: Optional[List[Dict[str, Any]]] = None
         self.players: List[str] = []
@@ -82,6 +82,7 @@ class JuegoMemoria(object):
         self._wd.start()
 
     # ---------- Helpers de voz ----------
+        self.board: Optional[List[Dict[str, Any]]] = None
     def say(self, text: str):
         # mantener firma simple para evitar errores (algunas implementaciones no aceptan wait/animated)
         self.tm.talk(text=text, language=self.tts_lang)
