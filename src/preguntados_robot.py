@@ -37,15 +37,12 @@ class Preguntados(object):
         '''
         # TODO: Implementar interfaz grafica para mostrar preguntas y respuestas
         # TODO: Implementar funciones varias que permitan el movimiento y expresion del robot
-        # TODO: Deteccion de numeros mediante entrada de voz
-        # TODO: Manejo de errores y excepciones
 
         # Se definen las transiciones entre estados
         transitions = [
             {"trigger": "start", "source": "TRIVIA", "dest": "INIT"},
             {"trigger": "begin", "source": "INIT", "dest": "WAIT4GUEST"},
             {"trigger": "new_game_start", "source": "WAIT4GUEST", "dest": "PREGUNTADOS"},
-            {"trigger": "ask_question", "source": "PREGUNTADOS", "dest": "QASPROCESSING"},
             {"trigger": "restart", "source": "PREGUNTADOS", "dest": "WAIT4GUEST"},
         ]
         self.machine = Machine(model=self, states=states, transitions=transitions, initial='TRIVIA')
@@ -57,6 +54,7 @@ class Preguntados(object):
         self.tm.initialize_pepper()
         self.tm.talk("Hola, soy Pepper. Vamos a jugar a Preguntados. Te deseo suerte.", language="Spanish")
         self.tm.talk("El juego consiste en que yo te hare preguntas de diferentes categorias y tu deberas responderlas.", language="Spanish")
+        self.tm.talk("Tienes que decir la respuesta que consideres correcta exactamente igual que como yo la dije", language="Spanish")
         self.begin()
     
     def on_enter_WAIT4GUEST(self):
@@ -89,7 +87,7 @@ class Preguntados(object):
         self.tm.talk("Muy bien, ya estamos listos para comenzar. Te hare la primera pregunta.", language="Spanish")
         # Bucle principal del juego, se hacen las preguntas y se verifica la respuesta, esto basado en el numero de rondas provisto
         for _ in range(self.total_rounds):
-            self.ask_question()
+            self.QASPROCESSING(self)
             if self.is_correct:
                 self.tm.talk("Correcto! Has respondido bien.", language="Spanish")
                 self.score += 1
@@ -100,7 +98,7 @@ class Preguntados(object):
         # Se vuelve al estado WAIT4GUEST para esperar un nuevo jugador 
         self.restart()
         
-    def on_enter_QASPROCESSING(self):
+    def QASPROCESSING(self):
         '''Se hace la pregunta y se espera la respuesta del usuario'''
         # Se elige una tematica y una pregunta aleatoriamente
         preguntas_respuestas = self.qas
@@ -146,6 +144,8 @@ class Preguntados(object):
                 categoria = "Ciencia"
             elif "Mitología" in categoria:
                 categoria = "Historia"
+            elif "general" in categoria:
+                categoria = "Conocimiento General"
             if categoria not in qas:
                 qas[categoria] = []
             qas[categoria].append((pregunta, {"options": opciones, "correct": correcta}))
