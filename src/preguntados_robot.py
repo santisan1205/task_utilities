@@ -54,7 +54,7 @@ class Preguntados(object):
         self.tm.initialize_pepper()
         self.tm.talk("Hola, soy Pepper. Vamos a jugar a Preguntados. Te deseo suerte.", language="Spanish")
         self.tm.talk("El juego consiste en que yo te hare preguntas de diferentes categorias y tu deberas responderlas.", language="Spanish")
-        self.tm.talk("Tienes que decir la respuesta que consideres correcta exactamente igual que como yo la dije", language="Spanish")
+        self.tm.talk("Tienes que decir la respuesta que consideres correcta exactamente igual que como yo la diga", language="Spanish")
         self.begin()
     
     def on_enter_WAIT4GUEST(self):
@@ -67,7 +67,7 @@ class Preguntados(object):
                 if "jugar" in text.lower():
                     self.new_game = True
                     self.hearing = False
-                    self.tm.talk("Perfecto, vamos a empezar una nueva partida.")
+                    self.tm.talk("Perfecto, vamos a empezar una nueva partida.", language="Spanish")
                     self.new_game_start()
     
     def on_enter_PREGUNTADOS(self):
