@@ -8,7 +8,7 @@ import os
 import ConsoleFormatter
 import random
 import json
-
+from robot_toolkit_msgs.msg import speech_recognition_status_msg
 class Preguntados(object):
     
     def __init__(self) -> None:
@@ -52,6 +52,9 @@ class Preguntados(object):
     def on_enter_INIT(self):
         print(self.consoleFormatter.format("Inicializacion del task: "+self.task_name, "HEADER"))
         self.tm.initialize_pepper()
+        self.enable_breathing_service()
+        self.tm.hot_word(["jugar"], thresholds=[0.4],language="Spanish")
+        subscriber = rospy.Subscriber("/pytoolkit/ALSpeechRecognition/status",speech_recognition_status_msg,self.callback_hot_word)
         self.tm.talk("Hola, soy Pepper. Vamos a jugar a Preguntados. Te deseo suerte.", language="Spanish")
         self.tm.talk("El juego consiste en que yo te hare preguntas de diferentes categorias y tu deberas responderlas.", language="Spanish")
         self.tm.talk("Tienes que decir la respuesta que consideres correcta exactamente igual que como yo la diga", language="Spanish")
@@ -60,15 +63,10 @@ class Preguntados(object):
     def on_enter_WAIT4GUEST(self):
         print(self.consoleFormatter.format("Esperando a un invitado...", "HEADER"))
         self.tm.talk("Estoy esperando a que un invitado me diga: Empezar juego, para comenzar una nueva partida.", language="Spanish")
-        while self.hearing:
-            text = self.tm.speech2text_srv(seconds=0, lang="esp")
-            if text:
-                print(self.consoleFormatter.format("He escuchado: "+text, "OKGREEN"))
-                if "jugar" in text.lower():
-                    self.new_game = True
-                    self.hearing = False
-                    self.tm.talk("Perfecto, vamos a empezar una nueva partida.", language="Spanish")
-                    self.new_game_start()
+        while self.new_game==False:
+            rospy.sleep(0.1)
+        self.tm.talk("Perfecto, vamos a empezar una nueva partida.", language="Spanish")
+        self.new_game_start()
     
     def on_enter_PREGUNTADOS(self):
         print(self.consoleFormatter.format("Comenzando el juego de Preguntados", "HEADER"))
@@ -113,19 +111,37 @@ class Preguntados(object):
         f"Pregunta {self.question_number}: {pregunta}. "
         f"Las opciones son: {', '.join(respuestas['options'])}."
         "Por favor, responde con la opcion correcta.", language="Spanish")
-        respuesta = self.tm.speech2text_srv()
+        # Esperar la respuesta del usuario mediante speech2text
+        while self.listo_respuesta==False:
+            rospy.sleep(0.1)    
+        # Obtener la respuesta del usuario
+        respuesta = self.tm.speech2text_srv(seconds=5, lang="esp")
+        if respuesta is None:
+            rospy.sleep(0.1)
         # Validar que la respuesta este entre las opciones, en la pantalla muestra si es correcto o no
+        while respuesta not in self.current_answers["options"]:
+            respuesta = self.tm.speech2text_srv(seconds=5, lang="esp")
+            self.tm.talk("No he podido entender tu respuesta. Por favor, intenta de nuevo.", language="Spanish")
+            self.answer = None
+        # Almacenar la respuesta del usuario
         if respuesta in self.current_answers["options"]:
             print(self.consoleFormatter.format("He escuchado: "+respuesta, "OKGREEN"))
             self.answer = respuesta
-        else:
-            self.tm.talk("No he podido entender tu respuesta. Por favor, intenta de nuevo.", language="Spanish")
-            self.answer = None
         # Se verifica si la respuesta es correcta, en patalla se muestra el puntaje actual
         self.is_correct = (self.answer == self.current_answers["correct"])
         ''''Se muestra el puntaje en pantalla, falta implementacion de parte de interface para esto'''
         self.question_number += 1
         
+    def callback_hot_word(self,data):
+        # Callback para el hotword "jugar" y "respuesta"
+        word = data.status
+        print(word, " listened")
+        if word=="jugar":
+            self.new_game = True
+        if word == "respuesta":
+            self.listo_respuesta = False
+            
+    
     
     """Funciones auxiliares"""
     
