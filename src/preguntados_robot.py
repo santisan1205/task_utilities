@@ -63,6 +63,12 @@ class Preguntados(object):
     def on_enter_WAIT4GUEST(self):
         print(self.consoleFormatter.format("Esperando a un invitado...", "HEADER"))
         self.tm.talk("Estoy esperando a que un invitado me diga: Empezar juego, para comenzar una nueva partida.", language="Spanish")
+        speech2text_thread = threading.Thread(target=self.speech2text_function)
+        speech2text_thread.start()    
+            
+        while self.answer == "":
+            rospy.sleep(0.1)
+        speech2text_thread.join(20)
         while self.new_game==False:
             rospy.sleep(0.1)
         self.tm.talk("Perfecto, vamos a empezar una nueva partida.", language="Spanish")
@@ -112,6 +118,14 @@ class Preguntados(object):
         f"Las opciones son: {', '.join(respuestas['options'])}."
         "Por favor, responde con la opcion correcta.", language="Spanish")
         # Esperar la respuesta del usuario mediante speech2text
+        self.answer=""
+            
+        speech2text_thread = threading.Thread(target=self.speech2text_function)
+        speech2text_thread.start()    
+            
+        while self.answer == "":
+            rospy.sleep(0.1)
+        speech2text_thread.join(20)
         while self.listo_respuesta==False:
             rospy.sleep(0.1)    
         # Obtener la respuesta del usuario
