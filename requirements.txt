@@ -11,3 +11,6 @@ requests
 bcrypt
 fastapi
 uvicorn
+pyyaml
+rospkg
+pandas

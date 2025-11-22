@@ -165,7 +165,7 @@ class Evento(object):
     def hey_pepper_function(self):
         self.tm.talk("Dímelo manzana","Spanish",animated=True,wait=False)
         rospy.sleep(1)
-        text = self.tm.speech2text_srv(seconds=0,lang="esp")
+        text = self.tm.speech2text_srv(seconds=0,lang="es")
         if self.robot_name != "orion":
             self.tm.play_animation("Waiting/Think_3")
         elif self.robot_name == "orion":
@@ -237,7 +237,7 @@ class Evento(object):
                 self.callback_hot_word(word_msg)
             elif "sigue" in text.lower() or "siga" in text.lower() or "sígueme" in text.lower() or "seguirme" in text.lower() and self.robot_name!="orion":
                 self.tm.talk("Solo te puedo seguir si me dan permiso, para esto deben decirme la contraseña","Spanish",animated=True, wait=True)
-                text = self.tm.speech2text_srv(seconds=0,lang="esp")
+                text = self.tm.speech2text_srv(seconds=0,lang="es")
                 if "tobi" in text.lower() or "tovi" in text.lower() or "tobbi" in text.lower() or "tovvi" in text.lower() or "tobey" in text.lower()  or "toby" in text.lower() or "tovy" in text.lower()  or "tove" in text.lower() or "tobe" in text.lower() or "toy" in text.lower() or "toi" in text.lower():
                     self.tm.talk("ding! ding! ding! Contraseña correcta, voy a seguir a la persona que tenga en frente hasta que me toquen la cabeza, por favor tengan cuidado conmigo.","Spanish",animated=True, wait=True)
                     self.tm.start_follow_face_proxy()
