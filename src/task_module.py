@@ -1561,7 +1561,7 @@ class Task_module:
         self.live_transcription_proxy(True)
         rospy.time(1000)
         
-    def answer_question(self, question:str, temperature = 0.5, save_conversation = True, fill_time = True)->str:
+    def answer_question(self, question:str, temperature = 0.5, save_conversation = True)->str:
         """
         Input: 
         question: String question to respond 
