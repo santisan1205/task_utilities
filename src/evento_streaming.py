@@ -99,6 +99,7 @@ class Evento(object):
             self.tm.wait_for_head_touch(timeout=10000000,message="Toca mi cabeza para hablar",message_interval=60,language="Spanish")
             if self.robot_name != "orion":
                 self.tm.show_words_proxy()
+                pass
             self.hey_pepper_function()
             self.hey_pepper=False
             rospy.sleep(0.1)
@@ -109,6 +110,7 @@ class Evento(object):
         print(self.consoleFormatter.format("WAIT4GUEST", "HEADER"))
         if self.robot_name != "orion":
             self.tm.show_words_proxy()
+            pass
         self.is_done=False
         if self.robot_name != "orion":
             self.tm.setRPosture_srv("stand")
@@ -216,13 +218,6 @@ class Evento(object):
                 answer = ""
                 word_msg = speech_recognition_status_msg()
                 word_msg.status = "baile"
-                self.callback_hot_word(word_msg)
-            elif "darme la mano" in text.lower() or "dame la mano" in text.lower() or "da la mano" in text.lower():
-                answer = "Claro que si, toma cualquier mano y aprieta suavemente la parte de afuera!"
-            elif "tómame una foto" in text.lower() or "tomame una foto" in text.lower() or "tómarme una foto" in text.lower() or "tomarme una foto" in text.lower():
-                answer = "fotito!"
-                word_msg = speech_recognition_status_msg()
-                word_msg.status = "foto"
                 self.callback_hot_word(word_msg)
             elif "carro" in text.lower() or "conduce" in text.lower()  or "conducir" in text.lower():
                 answer = "A conducir!"
