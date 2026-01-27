@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tirant Prime</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="centered">
+      <!-- Reemplazar el título por el logo -->
+      <img
+        src="assets/Tirant-Prime-Conversa.png"
+        alt="Tirant Prime Logo"
+        class="main-logo"
+      />
+      <div class="button-container">
+        <button class="btn" onclick="funcion_robot('dance')">Bailar</button>
+        <button class="btn" onclick="funcion_robot('pose')">Posar</button>
+        <button class="btn" onclick="funcion_robot('foto')">Tomar foto</button>
+      </div>
+
+      <a class="esquina" href="index.html"
+        ><img src="assets/casa.svg" width="50px"
+      /></a>
+    </div>
+    <script>
+      function funcion_robot(val) {
+        fetch("http://157.253.192.192:8001/action?action=" + val, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
+

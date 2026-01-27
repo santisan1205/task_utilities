@@ -43,13 +43,8 @@ def call_say_to_file_srv(text):
         print(f"Service call failed: {e}")
 
 if __name__ == "__main__":
-    rospy.init_node('say_to_file_client')
     
-    text_to_say = "Hello, this is a test message."
+    text_to_say = "Hola, soy nova"
     
-    tm = tm(perception = False,speech=True)
-    call_say_to_file_srv(text_to_say)
-    tm.talk(text_to_say,language="English",wait=True,animated=True)
-    text_to_say = "Hola, este mensaje es un test"
-    tm.talk(text_to_say,language="Spanish",wait=True,animated=True)
+    tm = tm(perception = False)
     call_say_to_file_srv(text_to_say)
