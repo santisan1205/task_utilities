@@ -1,25 +1,19 @@
-// Old-school "ES5" JavaScript compatible with ancient browsers
-function runAction(actionName) {
+function runTrigger(triggerName) {
     var statusDiv = document.getElementById("status-msg");
-    statusDiv.innerHTML = "⏳ Sending " + actionName + "...";
+    statusDiv.innerHTML = "⏳ Processing " + triggerName + "...";
 
-    // Use XMLHttpRequest instead of 'fetch'
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/run/" + actionName, true);
+    // Notice we point to /trigger/ now
+    xhr.open("POST", "/trigger/" + triggerName, true);
     
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) { // 4 means request finished
+        if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 statusDiv.innerHTML = xhr.responseText;
             } else {
-                statusDiv.innerHTML = "❌ Error: " + xhr.status;
+                statusDiv.innerHTML = "❌ Error";
             }
         }
     };
-    
-    xhr.onerror = function() {
-        statusDiv.innerHTML = "❌ Network Error";
-    };
-
     xhr.send();
 }

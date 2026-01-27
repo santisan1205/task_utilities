@@ -1,33 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pepper Control</title>
+    <title>Nova Init</title>
     <link rel="stylesheet" href="{{ url_for('static', path='simple_style.css') }}">
-    <script src="{{ url_for('static', path='actions.js') }}"></script>
 </head>
 <body>
-
-    <h1>Pepper Control Panel</h1>
-    
-    <div id="status-msg" class="status">Ready</div>
-
-    <div class="grid">
-        <button onclick="runAction('greet')">
-            👋 Greet
-        </button>
-
-        <button onclick="runAction('dance')">
-            💃 Dance
-        </button>
-
-        <button onclick="runAction('pose')">
-            📸 Pose
-        </button>
-
-        <button onclick="runAction('acabo_hablar')">
-            🔚 Finish
-        </button>
+    <div class="centered">
+        <h1>Hi, I'm Nova!</h1>
+        <p>Initializing conversation...</p>
     </div>
-
 </body>
 </html>

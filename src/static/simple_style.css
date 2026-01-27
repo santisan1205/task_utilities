@@ -1,45 +1,18 @@
 body {
+    background-color: #ecf0f1;
     font-family: sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 20px;
-    background-color: #f4f4f9;
 }
-
 h1 {
-    color: #333;
+    font-size: 60px;
+    color: #2c3e50;
 }
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-button {
-    padding: 20px;
-    font-size: 18px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    /* Remove fancy transitions if they cause lag on old tablets */
-}
-
-button:active {
-    background-color: #0056b3;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.status {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #555;
-    height: 30px;
+p, h2 {
+    font-size: 30px;
+    color: #7f8c8d;
 }
