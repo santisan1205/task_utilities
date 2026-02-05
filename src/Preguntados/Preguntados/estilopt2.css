@@ -1,0 +1,233 @@
+body {
+    background-color: #d9e0f4;
+    font-family: "Garamond", serif;
+    text-align: center;
+    margin: 0;
+    height: 100vh;
+  }
+  
+  .pantalla {
+    display: none;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .visible {
+    display: flex;
+  }
+  
+  .categorias-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;     
+    height: auto;
+    background: rgb(255, 255, 255);
+    border-radius: 100%;
+    box-shadow: 0 0 10px #aaa;
+  }
+  
+  .categoria {
+    position: absolute;
+    width: 170px;
+    height: 140px;
+    border-radius: 40px;
+    color: black;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .categoria:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Conocimiento general */
+  .c1 { top: -5%; left: 38%; transform: translateX(-10%); background: #bba1e2; }
+  /* Historia y mitologia */
+  .c2 { top: 28%; right: -10%;  transform: translateX(-10%); background: #adbee5; }
+  /* ciencia y tec */
+  .c3 { bottom: 15%; left: 65%; transform: translateX(-10%);background: #a3e8c9; }
+  /* geografia */
+  .c4 { bottom: 15%; left: 15%; transform: translateX(-10%);background: #e9dbaf; }
+  /* Entretenimiento */
+  .c5 { top: 28%; left: -5%;transform: translateX(-10%); background: #e8afcc; }
+  
+  .icono {
+    position: absolute;
+    top: -30px; 
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .icono img {
+    background: transparent;
+    object-fit: contain;
+    width: 30px;
+    height: 30px;
+  }
+
+  .c1 .icono { background-color: #7c42d3; } 
+  .c2 .icono { background-color: #5b70ce; }  
+  .c3 .icono { background-color: #41a679; }  
+  .c4 .icono { background-color: #e1b936; }  
+  .c5 .icono { background-color: #da6ba4; }
+  
+  
+  .icono img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-top: 2px;  
+  }
+
+  .boton-reiniciar {
+    width: 180px;
+    position: fixed;           
+    bottom: 60px;           
+    left: 42.5%;               
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #728aa2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 100;          
+  }
+  
+  .boton-reiniciar:hover {
+    background-color: #c298f5;
+    transform: translateX(-50%) scale(1.05);
+  }
+
+
+  .boton-aleatorio {
+    width: 180px;
+    position: fixed;
+    bottom: 60px;
+    left: 58%;
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #728aa2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .boton-aleatorio:hover {
+    background-color: #c298f5;
+    transform: translateX(-50%) scale(1.05);
+  }
+  
+  .categoria.destacada {
+    outline: 3px solid white;
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    transform: scale(1.1); 
+  }
+
+  
+  .pregunta-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 0 15px #ccc;
+  }
+  
+  #opciones button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f1f1;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #opciones button:hover {
+    background: #d8e1ff;
+  }
+
+  .resultado-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 0 20px #ccc;
+    min-width: 300px; 
+    width: 400px;    
+    margin: 0 auto;
+  }
+  
+  #iconoResultado {
+    font-size: 100px;
+    color: rgb(1, 103, 1);
+  }
+
+  .icono-resultado-img {
+    width: 150px;  
+    height: auto;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+  
+  #volver {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #728aa2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+.puntaje-container {
+  width: 140px;
+  position: fixed;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #728aa200;
+  color: rgb(36, 35, 35);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  z-index: 100;
+
+}

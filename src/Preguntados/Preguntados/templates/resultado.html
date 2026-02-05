@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resultado - Preguntados SinfonIA</title>
+  <link rel="stylesheet" href="/static/estilo.css" />
+</head>
+<body>
+
+<section id="resultado" class="pantalla visible">
+  <div class="resultado-box">
+    <img id="iconoResultado" src="/static/trofeo.png" class="icono-resultado" />
+    <h2 id="textoResultado">Cargando resultado...</h2>
+    <p>PUNTAJE: <span id="puntaje">0</span></p>
+  </div>
+</section>
+
+<script>
+async function cargarResultado() {
+  try {
+    const res = await fetch("/api/resultado");
+    const data = await res.json();
+
+    // Ahora el icono es una imagen
+    document.getElementById("iconoResultado").src = data.icono;
+
+    document.getElementById("textoResultado").innerText = data.mensaje;
+    document.getElementById("puntaje").innerText =
+      data.puntaje + " / " + data.total;
+
+  } catch (error) {
+    console.error("Error cargando resultado:", error);
+  }
+}
+
+cargarResultado();
+</script>
+
+</body>
+</html>

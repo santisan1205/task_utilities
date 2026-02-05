@@ -1,0 +1,217 @@
+body {
+  background-color: #d9e0f4;
+  font-family: "Garamond", serif;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+}
+
+.pantalla {
+  display: none;
+  height: 100%;
+  text-align: center;
+}
+
+.visible {
+  display: block;
+}
+
+.categorias-container {
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 400px;
+  height: 400px;
+  
+}
+
+.logo { 
+  position: fixed; 
+  top: 45%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 200px; 
+  height: 130px; 
+  background: #fff; 
+  border-radius: 100%; 
+  box-shadow: 0 0 10px #aaa; 
+}
+
+.categoria {
+  font-size: 11px;
+  position: absolute;
+  width: 155px;
+  height: 100px;
+  border-radius: 40px;
+  color: black;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s; 
+  transition: transform 0.3s;
+}
+
+.categoria:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/* Conocimiento general */
+.c1 { top: 3%; left: 35%; transform: translateX(-10%); background: #bba1e2; }
+/* Historia y mitologia */
+.c2 { top: 30%; left: 85%;  transform: translateX(-10%); background: #adbee5; }
+/* ciencia y tec */
+.c3 { bottom: 12%; left: 60%; transform: translateX(-10%);background: #a3e8c9; }
+/* geografia */
+.c4 { bottom: 12%; left: 10%; transform: translateX(-10%);background: #e9dbaf; }
+/* Entretenimiento */
+.c5 { top: 30%; right: 77%; transform: translateX(-10%); background: #e8afcc; }
+
+.icono {
+  position: absolute;
+  top: -20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;    
+  text-align: center;
+  line-height: 50px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.icono img {
+  width: 40px;    
+  height: 40px;
+}
+
+.c1 .icono { background-color: #7c42d3; }
+.c2 .icono { background-color: #5b70ce; }
+.c3 .icono { background-color: #41a679; }
+.c4 .icono { background-color: #e1b936; }
+.c5 .icono { background-color: #da6ba4; }
+
+.botones-container {
+  position: fixed;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 40px;  /* espacio entre botones */
+  z-index: 100;
+}
+
+.boton-reiniciar,
+.boton-aleatorio {
+  width: 120px;
+  height: 35px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #728aa2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+
+.boton-reiniciar:hover,
+.boton-aleatorio:hover {
+  background-color: #c298f5;
+}
+
+.categoria.destacada {
+  outline: 3px solid white;
+  box-shadow: 0 0 20px white;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+/*caja con las preguntas luego de seleccionar la categoria */
+.pregunta-box {
+  background: white;
+  position: fixed;  
+  top: 50%;        
+  left: 50%;        
+  transform: translate(-50%, -50%); 
+  width: 400px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #ccc;
+  z-index: 999;
+}
+
+#opciones button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #f1f1f1;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#opciones button:hover {
+  background: #d8e1ff;
+}
+/*cuando dice si esta bien o esta mal*/
+.resultado-box {
+  background: white;
+  position: fixed;  
+  top: 50%;        
+  left: 50%;        
+  transform: translate(-50%, -50%); 
+  width: 400px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #ccc;
+  z-index: 999;
+}
+
+#iconoResultado {
+  font-size: 0px;
+  color: rgb(1, 103, 1);
+  line-height: 0;
+}
+
+.icono-resultado-img {
+  width: 150px;  
+  height: auto;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+#volver {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #728aa2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.puntaje-container {
+  width: 120px;          
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #728aa200;
+  color: rgb(36, 35, 35);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  z-index: 100;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pregunta - Preguntados SinfonIA</title>
+  <link rel="stylesheet" href="/static/estilo.css" />
+</head>
+<body>
+
+<section id="pregunta" class="pantalla visible">
+  <div class="pregunta-box">
+    <h2 id="categoriaNombre">Cargando categoría...</h2>
+    <p id="textoPregunta">Cargando pregunta...</p>
+    <div id="opciones"></div>
+  </div>
+</section>
+
+<script>
+async function cargarPregunta() {
+  try {
+    const res = await fetch("/api/pregunta");
+    const data = await res.json();
+
+    document.getElementById("categoriaNombre").innerText = data.categoria;
+    document.getElementById("textoPregunta").innerText = data.pregunta;
+
+    const contenedor = document.getElementById("opciones");
+    contenedor.innerHTML = "";
+
+    data.opciones.forEach(op => {
+      const btn = document.createElement("button");
+      btn.className = "opcion-btn";
+      btn.innerText = op;
+      contenedor.appendChild(btn);
+    });
+
+  } catch (error) {
+    console.error("Error cargando pregunta:", error);
+  }
+}
+
+cargarPregunta();
+</script>
+
+</body>
+</html>
