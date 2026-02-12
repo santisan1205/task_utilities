@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NovaMemory - SINFONIA</title>
+  <title>RoboMemory - SINFONIA</title>
   <link rel="stylesheet" href="/static/styles.css">
-  <script src="/static/game.js"></script>
 </head>
 <body>
-  <div class="mode-overlay" id="mode-overlay">
-    <div class="setup-card">
-      <div class="setup-card-header left">
-        <h2 class="setup-title">Configuración</h2>
-        <p class="setup-subtitle">Elige cómo quieres jugar y el tema de las cartas.</p>
+  <div class="particles" id="particles"></div>
+  
+  <div class="container">
+    <!-- Panel izquierdo para configuración -->
+    <div class="config-panel">
+      <div class="config-header">
+        <h2 class="config-title">Configuración</h2>
+        <p class="config-subtitle">Elige cómo quieres jugar y el tema de las cartas</p>
       </div>
 
-      <div class="setup-section">
-        <h3 class="setup-section-title">Modo de juego</h3>
+      <div class="config-section">
+        <h3 class="config-section-title">Modo de juego</h3>
         <div class="option-group">
           <button class="option-btn" id="mode-solo-btn" data-mode="solo">
-            <div class="option-left"><div class="option-emoji">🎮</div></div>
+            <div class="option-left">
+              <div class="option-emoji">🎮</div>
+            </div>
             <div class="option-right">
               <div class="option-main">Solo</div>
               <div class="option-sub">1 jugador</div>
@@ -27,7 +31,9 @@
           </button>
 
           <button class="option-btn" id="mode-versus-btn" data-mode="versus">
-            <div class="option-left"><div class="option-emoji">⚔️</div></div>
+            <div class="option-left">
+              <div class="option-emoji">⚔️</div>
+            </div>
             <div class="option-right">
               <div class="option-main">Versus</div>
               <div class="option-sub">Jugador vs jugador</div>
@@ -36,25 +42,31 @@
         </div>
       </div>
 
-      <div class="setup-section">
-        <h3 class="setup-section-title">Tema</h3>
+      <div class="config-section">
+        <h3 class="config-section-title">Tema</h3>
         <div class="option-group">
           <button class="option-btn" id="cat-frutas-btn" data-category="frutas">
-            <div class="option-left"><div class="option-emoji">🍎</div></div>
+            <div class="option-left">
+              <div class="option-emoji">🍎</div>
+            </div>
             <div class="option-right">
               <div class="option-main">Frutas</div>
             </div>
           </button>
 
           <button class="option-btn" id="cat-aula-btn" data-category="aula">
-            <div class="option-left"><div class="option-emoji">✏️</div></div>
+            <div class="option-left">
+              <div class="option-emoji">✏️</div>
+            </div>
             <div class="option-right">
               <div class="option-main">Aula</div>
             </div>
           </button>
 
           <button class="option-btn" id="cat-animales-btn" data-category="animales">
-            <div class="option-left"><div class="option-emoji">🐱</div></div>
+            <div class="option-left">
+              <div class="option-emoji">🐱</div>
+            </div>
             <div class="option-right">
               <div class="option-main">Animales</div>
             </div>
@@ -63,79 +75,112 @@
       </div>
 
       <button class="confirm-btn" id="confirm-setup" disabled>Continuar</button>
-    </div>
-  </div>
 
-  <div class="win-overlay hidden" id="win-overlay">
-    <div class="win-card">
-      <div class="win-text" id="win-text">¡Ganó Jugador 1!</div>
-      <div class="win-scores" id="win-scores">P1: 5 | P2: 3</div>
-      <button class="option-btn win-close-btn" id="close-win">Volver al inicio</button>
-    </div>
-  </div>
-
-  <div class="container">
-    <header>
-      <h1>NovaMemory</h1>
-      <p class="subtitle">Fuiste retado por Nova. Prueba tus habilidades!</p>
-    </header>
-
-    <div class="game-info">
-      <div class="info-box">
-        <div class="info-icon">🎯</div>
-        <div class="info-text">
-          <div class="info-label">MOVIMIENTOS</div>
-          <div class="info-value" id="moves">0</div>
+      <div class="specs-section">
+        <h3 class="specs-title">Especificaciones Técnicas - Pepper V1.8a</h3>
+        <div class="specs-content">
+          <div class="spec-item">
+            <span class="spec-label">Dimensiones:</span>
+            <span class="spec-value">246 x 175 x 14.5 mm</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">CPU:</span>
+            <span class="spec-value">1.3 GHz quad-core ARM Cortex-A7</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">RAM:</span>
+            <span class="spec-value">1GB (512MB * 2)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Memoria Flash:</span>
+            <span class="spec-value">32GB (eMMC)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Pantalla:</span>
+            <span class="spec-value">IPS, 1280*800, 24bit true color</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Panel Táctil:</span>
+            <span class="spec-value">Capacitive Multi-Touch (5 point)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">WiFi:</span>
+            <span class="spec-value">802.11 a/b/g/n</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Sensores:</span>
+            <span class="spec-value">Light illumination, Acceleration, Gyro, Geomagnetic</span>
+          </div>
         </div>
       </div>
-      <div class="info-box">
-        <div class="info-icon">🔗</div>
-        <div class="info-text">
-          <div class="info-label">PAREJAS</div>
-          <div class="info-value" id="pairs">0/8</div>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-icon">⏳</div>
-        <div class="info-text">
-          <div class="info-label">TIEMPO</div>
-          <div class="info-value" id="timer">00:00</div>
-        </div>
-      </div>
     </div>
 
-    <div class="message" id="message">Selecciona modo y tema para empezar.</div>
+    <!-- Panel derecho para el juego -->
+    <div class="game-panel">
+      <header>
+        <h1>RoboMemory</h1>
+        <p class="subtitle">Fuiste retado por interface, prueba tus habilidades y saquen a la lider</p>
+      </header>
 
-    <div class="game-board" id="game-board"></div>
+      <div class="game-info">
+        <div class="info-box">
+          <div class="info-icon">🎯</div>
+          <div class="info-text">
+            <div class="info-label">MOVIMIENTOS</div>
+            <div class="info-value" id="moves">0</div>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🔗</div>
+          <div class="info-text">
+            <div class="info-label">PAREJAS</div>
+            <div class="info-value" id="pairs">0/8</div>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">⏳</div>
+          <div class="info-text">
+            <div class="info-label">TIEMPO</div>
+            <div class="info-value" id="timer">00:00</div>
+          </div>
+        </div>
+      </div>
 
-    <div class="turn-info" id="turn-info" style="display:none;">
-      <div class="score player1" id="score-p1">
-        <div class="label">Jugador 1</div>
-        <div class="value" id="p1-score">0</div>
-      </div>
-      <div class="turn-center">
-        <div class="turn-label">Turno actual</div>
-        <div class="turn-player" id="turn-player">J1</div>
-      </div>
-      <div class="score player2" id="score-p2">
-        <div class="label">Jugador 2</div>
-        <div class="value" id="p2-score">0</div>
-      </div>
-    </div>
+      <div class="message" id="message">Selecciona modo y tema para empezar.</div>
 
-    <div class="controls">
-      <button id="start-btn" class="btn-primary" disabled>Iniciar juego</button>
-      <button id="reset-btn" class="btn-ghost" disabled>Reiniciar</button>
-      <button id="hint-btn" class="btn-power" disabled>Pista</button>
+      <div class="game-board" id="game-board">
+        <!-- Las cartas se generarán aquí automáticamente -->
+      </div>
+
+      <div class="turn-info" id="turn-info" style="display:none;">
+        <div class="score player1" id="score-p1">
+          <div class="label">Jugador 1</div>
+          <div class="value" id="p1-score">0</div>
+        </div>
+        <div class="turn-center">
+          <div class="turn-label">Turno actual</div>
+          <div class="turn-player" id="turn-player">J1</div>
+        </div>
+        <div class="score player2" id="score-p2">
+          <div class="label">Jugador 2</div>
+          <div class="value" id="p2-score">0</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="start-btn" class="btn-primary" disabled>Iniciar juego</button>
+        <button id="reset-btn" class="btn-ghost" disabled>Reiniciar</button>
+        <button id="hint-btn" class="btn-power" disabled>Pista</button>
+      </div>
     </div>
   </div>
 
   <footer>
     <a href="https://i.ibb.co/Y4WW9Ldz/sinfonIA.png" target="_blank" class="footer-logo-link" rel="noopener noreferrer">
-      <img src="https://i.ibb.co/Y4WW9Ldz/sinfonIA.png" alt="SinfonIA / NovaMemory" class="footer-logo">
+      <img src="https://i.ibb.co/Y4WW9Ldz/sinfonIA.png" alt="SinfonIA / RoboMemory" class="footer-logo">
     </a>
   </footer>
 
-  <script src="game.js"></script>
+  <script src="/static/game.js"></script>
 </body>
 </html>

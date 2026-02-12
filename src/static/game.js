@@ -1,4 +1,3 @@
-
 const CATEGORIES = {
   frutas: ['🍎','🍌','🍊','🍇','🍐','🍍','🍓','🍉'],
   aula: ['✏️','🖊️','📘','📚','📁','📏','✂️','🖍️'],
@@ -52,18 +51,13 @@ let chosenMode = null;
 let chosenCategory = null;
 let selectedSymbols = [];
 
-const modeOverlay = document.getElementById('mode-overlay');
+// Elementos del DOM
 const modeSoloBtn = document.getElementById('mode-solo-btn');
 const modeVersusBtn = document.getElementById('mode-versus-btn');
 const catFrutasBtn = document.getElementById('cat-frutas-btn');
 const catAulaBtn = document.getElementById('cat-aula-btn');
 const catAnimalesBtn = document.getElementById('cat-animales-btn');
 const confirmSetupBtn = document.getElementById('confirm-setup');
-
-const winOverlay = document.getElementById('win-overlay');
-const winText = document.getElementById('win-text');
-const winScores = document.getElementById('win-scores');
-const closeWinBtn = document.getElementById('close-win');
 
 const gameBoard = document.getElementById('game-board');
 const movesDisplay = document.getElementById('moves');
@@ -81,6 +75,7 @@ const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const hintBtn = document.getElementById('hint-btn');
 
+// Funciones del juego
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -174,8 +169,8 @@ function checkForMatch() {
 
 function handleMatch() {
   firstCard.classList.add('matched');
-  secondCard.classList.add('matched');
   fetch('/api/match', { method: 'POST' });
+  secondCard.classList.add('matched');
   firstCard.removeEventListener('click', onCardClick);
   secondCard.removeEventListener('click', onCardClick);
   totalPairsFound++;
@@ -338,12 +333,12 @@ function finalizeSetupAndInitGame() {
   messageDisplay.textContent = 'Pulsa "Iniciar juego" para comenzar.';
   messageDisplay.classList.remove('win-message');
   updateScoreAndTurnInfo();
+  
+  // CORRECCIÓN: Habilitar el botón de inicio correctamente
   startBtn.disabled = false;
   resetBtn.disabled = true;
   hintBtn.disabled = true;
   updateHintButton();
-  modeOverlay.classList.add('hidden');
-  winOverlay.classList.add('hidden');
 }
 
 function startGame() {
@@ -385,14 +380,14 @@ function resetGame() {
   p1ScoreDisplay.textContent = '0';
   p2ScoreDisplay.textContent = '0';
   turnPlayerDisplay.textContent = '';
+  
+  // CORRECCIÓN: Deshabilitar botones correctamente
   startBtn.disabled = true;
   resetBtn.disabled = true;
   hintBtn.disabled = true;
   hintBtn.textContent = 'Pista';
   clearActiveOptions();
   confirmSetupBtn.disabled = true;
-  winOverlay.classList.add('hidden');
-  modeOverlay.classList.remove('hidden');
 }
 
 function endGame() {
@@ -400,13 +395,12 @@ function endGame() {
   gameStarted = false;
   if (gameMode === 'solo') {
     applyPlayerTheme(0);
-    winText.textContent = '¡Felicidades!';
-    winScores.textContent = `Completaste el juego en ${moves} movimientos y ${timerDisplay.textContent}.`;
-    winOverlay.classList.remove('hidden');
+    messageDisplay.textContent = `¡Felicidades! Completaste el juego en ${moves} movimientos y ${timerDisplay.textContent}.`;
+    messageDisplay.classList.add('win-message');
     hintBtn.disabled = true;
     startBtn.disabled = false;
     resetBtn.disabled = false;
-} else {
+  } else {
     const p1 = players[0].score;
     const p2 = players[1].score;
     let winnerMsg = '';
@@ -425,31 +419,55 @@ function endGame() {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ winner: winnerMsg }) 
     });
-    winText.textContent = winnerMsg;
-    winScores.textContent = `P1: ${p1} | P2: ${p2}`;
-    winOverlay.classList.remove('hidden');
+    messageDisplay.textContent = `${winnerMsg} P1: ${p1} | P2: ${p2}`;
+    messageDisplay.classList.add('win-message');
     hintBtn.disabled = true;
     startBtn.disabled = false;
     resetBtn.disabled = false;
   }
 }
 
+// Event listeners
 modeSoloBtn.addEventListener('click', () => selectMode('solo'));
 modeVersusBtn.addEventListener('click', () => selectMode('versus'));
 catFrutasBtn.addEventListener('click', () => selectCategory('frutas'));
 catAulaBtn.addEventListener('click', () => selectCategory('aula'));
 catAnimalesBtn.addEventListener('click', () => selectCategory('animales'));
 confirmSetupBtn.addEventListener('click', finalizeSetupAndInitGame);
-closeWinBtn.addEventListener('click', () => { resetGame(); });
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
 hintBtn.addEventListener('click', showHint);
 
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-  modeOverlay.classList.remove('hidden');
-  winOverlay.classList.add('hidden');
+  // Crear partículas de fondo
+  createParticles();
+  
   startBtn.disabled = true;
   resetBtn.disabled = true;
   hintBtn.disabled = true;
   messageDisplay.textContent = 'Selecciona modo y tema para empezar.';
 });
+
+// Función para crear partículas de fondo
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 30;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Tamaño y posición aleatorios
+    const size = Math.random() * 5 + 2;
+    const posX = Math.random() * 100;
+    const delay = Math.random() * 15;
+    
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${posX}%`;
+    particle.style.animationDelay = `${delay}s`;
+    
+    particlesContainer.appendChild(particle);
+  }
+}
