@@ -194,4 +194,4 @@ if __name__ == "__main__":
         if juego.state == 'INIT':
             juego.on_enter_INIT()
     threading.Thread(target=kickstart, daemon=True).start()
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8001) 
